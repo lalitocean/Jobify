@@ -1,6 +1,5 @@
 import bcrypt from "bcryptjs";
-import User from "../models/user.model.js";
-import bcrypt from "bcryptjs";
+import {User} from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 
 // for regsiter
@@ -16,7 +15,7 @@ export const register = async (req, res) => {
     }
     // user alrady register logic
     const user = await User.findOne({User});
-    if (User) {
+    if (!User) {
       return res.status(400).json({
         message: "User alrady exist with this email!",
         success: false,
@@ -133,7 +132,7 @@ export const logout = async (req, res) => {
 
 // for Update profile
 
-export const updateProfile = async (req, res) => {
+export const profileUpdate = async (req, res) => {
   try {
     const {fullName, email, phoneNumber, bio, skills} = req.body;
 

@@ -9,13 +9,14 @@ export const register = async (req, res) => {
     const {fullName, email, phoneNumber, password, role} = req.body;
     //   input missing logic
     if (!fullName || !email || !phoneNumber || !password || !role) {
-      return res
-        .status(400)
-        .json({message: "somthing is missing", success: false});
+      return res.status(400).json({
+        message: "somthing is missing?",
+        success: false,
+      });
     }
-    // user alrady register logic
-    const user = await User.findOne({User});
-    if (!User) {
+    // user alrady exits logic
+    const user = await User.findOne({email});
+    if (user) {
       return res.status(400).json({
         message: "User alrady exist with this email!",
         success: false,

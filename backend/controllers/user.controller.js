@@ -26,6 +26,7 @@ export const register = async (req, res) => {
     // passwordConvertInHas Logic
 
     const hashedPassword = await bcrypt.hash(password, 10);
+    // saved hasdedPassword..
     await User.create({
       fullName,
       email,
@@ -34,6 +35,7 @@ export const register = async (req, res) => {
       role,
     });
 
+    // all true
     return res.status(200).json({
       message: "Account created successfully.",
       success: true,
@@ -59,7 +61,7 @@ export const login = async (req, res) => {
     let user = await User.findOne({email});
     if (!User) {
       return res.status(400).json({
-        message: "Incorrect email !",
+        message: "Incorrect email...",
         success: false,
       });
     }
@@ -77,7 +79,7 @@ export const login = async (req, res) => {
 
     //   checking role is correct or not
 
-    if (role == !user.role) {
+    if (role !== user.role) {
       return res.status(400).json({
         message: "Account does not exist with current role.",
         success: false,

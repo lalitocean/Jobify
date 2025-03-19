@@ -3,6 +3,9 @@ import {User} from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 
 // for regsiter
+// for login
+// for logout
+// for update profile
 
 export const register = async (req, res) => {
   try {
@@ -14,7 +17,7 @@ export const register = async (req, res) => {
         success: false,
       });
     }
-    // user alrady exits logic
+    // user alrady exist logic
     const user = await User.findOne({email});
     if (user) {
       return res.status(400).json({
@@ -59,7 +62,7 @@ export const login = async (req, res) => {
 
     // User Dose not exist Logic
     let user = await User.findOne({email});
-    if (!User) {
+    if (!user) {
       return res.status(400).json({
         message: "Incorrect email...",
         success: false,
@@ -98,7 +101,7 @@ export const login = async (req, res) => {
 
     //   token to store in cookie
 
-    User = {
+    user = {
       _id: user._id,
       fullName: user.fullName,
       email: user.email,
@@ -139,30 +142,36 @@ export const profileUpdate = async (req, res) => {
   try {
     const {fullName, email, phoneNumber, bio, skills} = req.body;
 
-    if (!fullName || !email || !phoneNumber || !bio || !skills) {
-      return res
-        .status(400)
-        .json({message: "Something is missing", success: true});
+    let skillsArray;
+    if (skills) {
+      skillsArray = skills.split(",");
+    }
+    const userId = req.id;
+    let user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(400).json({
+        message: "User Not Found",
+        success: false,
+      });
     }
 
-    const skillsArray = skills.split(",");
+    // Profile updated values
+    if (fullName) user.fullName = fullName;
+    if (email) user.email = email;
+    if (phoneNumber) user.phoneNumber = phoneNumber;
+    if (bio) user.bio = bio;
+    if (skills) user.skills = skillsArray;
 
-    // updated values
-    User.fullName = fullName;
-    User.email = email;
-    User.phoneNumber = phoneNumber;
-    User.bio = bio;
-    User.skills = skillsArray;
+    await user.save();
 
-    await User.save();
-
-    User = {
-      _id: User._id,
-      fullName: User.fullName,
-      email: User.email,
-      phoneNumber: User.phoneNumber,
-      role: User.role,
-      profile: User.profile,
+    user = {
+      _id: user._id,
+      fullName: user.fullName,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
+      role: user.role,
+      profile: user.profile,
     };
 
     return res.status(200).json({

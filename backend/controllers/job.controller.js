@@ -1,27 +1,28 @@
-import {Job} from "../models/job.model";
+import {Job} from "../models/job.model.js";
+import {User} from "../models/user.model.js";
 
 export const postJob = async (req, res) => {
   try {
     const {
       title,
       description,
-      requriments,
+      requirements,
       salary,
       location,
       jobType,
-      postion,
+      position,
       experience,
       companyId,
     } = req.body;
-
+    const userId = req.id;
     if (
       !title ||
       !description ||
-      !requriments ||
+      !requirements ||
       !salary ||
       !location ||
       !jobType ||
-      !postion ||
+      !position ||
       !experience ||
       !companyId
     ) {
@@ -34,12 +35,12 @@ export const postJob = async (req, res) => {
     const job = await Job.create({
       title,
       description,
-      requriments: requriments.split(","),
+      requirements: requirements.split(","),
       salary: Number(salary),
       location,
       jobType,
-      postion,
-      experienceLevel: experience,
+      position,
+      experience,
       company: companyId,
       created_by: userId,
     });
@@ -115,5 +116,7 @@ export const getAdminJobs = async (req, res) => {
       jobs,
       success: true,
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error.message);
+  }
 };

@@ -96,7 +96,7 @@ export const login = async (req, res) => {
     };
 
     const token = jwt.sign(tokenDate, process.env.SECRET_KEY, {
-      expiresIn: "1d",
+      expiresIn: "7d",
     });
 
     //   token to store in cookie

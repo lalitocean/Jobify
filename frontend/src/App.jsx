@@ -1,9 +1,12 @@
 import "./App.css";
+import {Button} from "./components/ui/button";
 
 function App() {
   return (
     <>
-      <p>hi ui</p>
+      <div>
+        Hello <Button>click me</Button>
+      </div>
     </>
   );
 }

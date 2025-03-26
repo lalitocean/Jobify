@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     <>
       <footer className="bg-white">
-        <div className="mx-auto max-w-screen-xl px-4 pt-5 pb-8 sm:px-6 lg:px-8 lg:pt-24 border-t border-gray-200">
+        <div className="mx-auto max-w-screen-xl px-4 pt-5 pb-5 sm:px-6 lg:px-8 lg:pt-10 border-t border-gray-200">
           <div className="text-center">
             <h2 className="text-3xl font-extrabold text-red-700 sm:text-5xl">
               Find Your Dream Job

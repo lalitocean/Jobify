@@ -4,8 +4,8 @@ import AppLayout from "./components/layout/AppLayout";
 import Jobs from "./components/pages/Jobs";
 import Browse from "./components/pages/Browse";
 import Contact from "./components/pages/Contact";
-import Login from "./components/pages/Login";
-import Register from "./components/pages/Register";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 
 const router = createBrowserRouter([
   {

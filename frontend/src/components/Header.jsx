@@ -2,8 +2,8 @@ import {useState} from "react";
 import {LogOut, Menu, User, X} from "lucide-react";
 import {Link, NavLink} from "react-router-dom";
 import {Popover, PopoverTrigger, PopoverContent} from "@radix-ui/react-popover";
-import {Avatar, AvatarImage} from "../ui/avatar";
-import {Button} from "../ui/button";
+import {Avatar, AvatarImage} from "./ui/avatar";
+import {Button} from "./ui/button";
 
 const Header = () => {
   const NavLinks = [
@@ -53,12 +53,12 @@ const Header = () => {
               <div className="hidden sm:flex sm:gap-4">
                 {!user ? (
                   <>
-                    <NavLink>
+                    <Link>
                       <Button to="/register" variant="outline">
                         Register
                       </Button>
-                    </NavLink>
-                    <NavLink>
+                    </Link>
+                    <Link>
                       <Button
                         to="/login"
                         className="bg-red-600 text-white
@@ -68,7 +68,7 @@ const Header = () => {
                       >
                         Login
                       </Button>
-                    </NavLink>
+                    </Link>
                   </>
                 ) : (
                   <>

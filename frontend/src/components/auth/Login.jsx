@@ -2,17 +2,57 @@ import {Input} from "../ui/input";
 import {RadioGroup} from "../ui/radio-group";
 import {Label} from "../ui/label";
 import {Link} from "react-router-dom";
+import {useState} from "react";
+import {USER_API} from "@/utils/constant";
+import axios from "axios";
+import {toast} from "sonner";
 
 const Login = () => {
+  const [input, setInput] = useState({
+    email: "",
+    password: "",
+    role: "",
+  });
+
+  // Handle input change
+  const handleChange = (e) => {
+    setInput({...input, [e.target.name]: e.target.value});
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(`${USER_API}/login`, input, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
+
+      if (res.data.success) {
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <>
       <section className=" pt-10 pb-10">
         <div className="max-w-2xl mx-auto border-1 shadow-2xs rounded-2xl">
-          <form className="bg-white px-10 py-5">
+          <form className="bg-white px-10 py-5" onSubmit={handleSubmit}>
             {/* Email */}
             <div className="mb-5">
               <Label className="block text-gray-700 mb-2">Your Email</Label>
-              <Input type="text" className="w-full" placeholder="Email" />
+              <Input
+                type="text"
+                name="email"
+                value={input.email}
+                onChange={handleChange}
+                className="w-full"
+                placeholder="Email"
+              />
             </div>
 
             <div className="mb-5">
@@ -20,6 +60,9 @@ const Login = () => {
                 Password
               </Label>
               <Input
+                name="password"
+                value={input.password}
+                onChange={handleChange}
                 type="password"
                 className="w-full "
                 placeholder="Password"
@@ -32,9 +75,11 @@ const Login = () => {
               <RadioGroup className="flex">
                 <div className="flex gap-2 border-1 px-5 rounded-3xl shadow-2xs">
                   <Input
-                    type="radio"
                     name="role"
                     value="student"
+                    checked={input.role === "student"}
+                    onChange={handleChange}
+                    type="radio"
                     className="cursor-pointer"
                   />
                   <Label htmlFor="r1" className="text-gray-700">
@@ -46,6 +91,8 @@ const Login = () => {
                     type="radio"
                     name="role"
                     value="recruiter"
+                    checked={input.role === "recruiter"}
+                    onChange={handleChange}
                     className="cursor-pointer"
                   />
                   <Label htmlFor="r2" className="text-gray-700">

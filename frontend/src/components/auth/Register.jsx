@@ -1,4 +1,3 @@
-import React from "react";
 import {Input} from "../ui/input";
 import {RadioGroup} from "../ui/radio-group";
 import {Label} from "../ui/label";
@@ -12,14 +11,14 @@ const Register = () => {
           <form className="bg-white px-10 py-5">
             {/* full Name */}
             <div className="mb-5">
-              <label className="block text-gray-700 mb-2" htmlFor="Last Name">
+              <Label className="block text-gray-700 mb-2" htmlFor="Last Name">
                 Full Name
-              </label>
+              </Label>
               <Input type="text" className="w-full " placeholder="Full Name" />
             </div>
             {/* Email */}
             <div className="mb-5">
-              <label className="block text-gray-700 mb-2">Your Email</label>
+              <Label className="block text-gray-700 mb-2">Your Email</Label>
               <Input type="text" className="w-full" placeholder="Email" />
             </div>
             {/* phone nUmber */}
@@ -34,9 +33,9 @@ const Register = () => {
               />
             </div>
             <div className="mb-5">
-              <label className="block text-gray-700 mb-2" htmlFor="Last Name">
+              <Label className="block text-gray-700 mb-2" htmlFor="Last Name">
                 Password
-              </label>
+              </Label>
               <Input
                 type="password"
                 className="w-full "
@@ -86,10 +85,10 @@ const Register = () => {
                 Create Account
               </button>
             </div>
-            <span>
+            <span className="text-gray-700 text-sm font-mono">
               {" "}
               Already have an account?{" "}
-              <Link to="/login" className="text-red-700 font-medium">
+              <Link to="/login" className="text-red-700 underline ">
                 Login
               </Link>
             </span>

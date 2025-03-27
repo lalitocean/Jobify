@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {LogOut, Menu, User, X} from "lucide-react";
-import {Link, NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Popover, PopoverTrigger, PopoverContent} from "@radix-ui/react-popover";
 import {Avatar, AvatarImage} from "./ui/avatar";
 import {Button} from "./ui/button";
@@ -27,9 +27,11 @@ const Header = () => {
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 ">
           <div className="flex h-16 items-center justify-between">
             <div className="md:flex md:items-center md:gap-12">
-              <a className="block bg-transparent text-red-700 border-3 rounded-md px-4 py-1.5 font-bold">
-                <span>Jobify</span>
-              </a>
+              <Link to="/">
+                <a className="block bg-transparent text-red-700 border-3 rounded-md px-4 py-1.5 font-bold">
+                  <span>Jobify</span>
+                </a>{" "}
+              </Link>
             </div>
             <div className="hidden md:block">
               <nav>
@@ -53,14 +55,11 @@ const Header = () => {
               <div className="hidden sm:flex sm:gap-4">
                 {!user ? (
                   <>
-                    <Link>
-                      <Button to="/register" variant="outline">
-                        Register
-                      </Button>
+                    <Link to="/register">
+                      <Button variant="outline">Register</Button>
                     </Link>
-                    <Link>
+                    <Link to="/login">
                       <Button
-                        to="/login"
                         className="bg-red-600 text-white
                         hover:bg-red-700
                         hover:text-white"

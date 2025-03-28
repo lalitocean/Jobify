@@ -8,16 +8,15 @@ import {USER_API} from "@/utils/constant";
 import {toast} from "sonner";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [input, setInput] = useState({
     fullName: "",
     email: "",
     phoneNumber: "",
     password: "",
     role: "",
-    Profilephoto: "",
+    profile: "",
   });
-
-  const navigate = useNavigate();
 
   // Handle input change
 
@@ -58,6 +57,7 @@ const Register = () => {
       }
     } catch (error) {
       console.log(error.message);
+      toast.error(error.response.data.message);
     }
   };
 
@@ -68,9 +68,7 @@ const Register = () => {
           <form className="bg-white px-10 py-5" onSubmit={handleSubmit}>
             {/* full Name */}
             <div className="mb-5">
-              <Label className="block text-gray-700 mb-2" htmlFor="fullName">
-                Full Name
-              </Label>
+              <Label className="block text-gray-700 mb-2">Full Name</Label>
               <Input
                 name="fullName"
                 value={input.fullName}
@@ -82,9 +80,7 @@ const Register = () => {
             </div>
             {/* Email */}
             <div className="mb-5">
-              <Label htmlFor="email" className="block text-gray-700 mb-2">
-                Your Email
-              </Label>
+              <Label className="block text-gray-700 mb-2">Your Email</Label>
               <Input
                 name="email"
                 value={input.email}
@@ -96,9 +92,7 @@ const Register = () => {
             </div>
             {/* phone nUmber */}
             <div className="mb-5">
-              <Label className="block text-gray-700 mb-2" htmlFor="phoneNumber">
-                Phone Number
-              </Label>
+              <Label className="block text-gray-700 mb-2">Phone Number</Label>
               <Input
                 name="phoneNumber"
                 value={input.phoneNumber}
@@ -109,9 +103,7 @@ const Register = () => {
               />
             </div>
             <div className="mb-5">
-              <Label className="block text-gray-700 mb-2" htmlFor="password">
-                Password
-              </Label>
+              <Label className="block text-gray-700 mb-2">Password</Label>
               <Input
                 name="password"
                 value={input.password}
@@ -155,11 +147,13 @@ const Register = () => {
               </RadioGroup>
             </div>
             <div className="mb-5">
-              <Label className="block text-gray-700 mb-3">Profile Photo</Label>
+              <Label className="block text-gray-700 mb-3">
+                Profile Photo
+              </Label>
               <Input
                 type="file"
-                name="Profilephoto"
-                value={input.Profilephoto}
+                name="profile"
+                
                 onChange={handleFileChange}
                 className="w-full"
                 accept="image/*"

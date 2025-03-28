@@ -6,13 +6,15 @@ import {useState} from "react";
 import {USER_API} from "@/utils/constant";
 import axios from "axios";
 import {toast} from "sonner";
-
+import {useNavigate} from "react-router-dom";
 const Login = () => {
   const [input, setInput] = useState({
     email: "",
     password: "",
     role: "",
   });
+
+  const navigate = useNavigate();
 
   // Handle input change
   const handleChange = (e) => {
@@ -30,10 +32,12 @@ const Login = () => {
       });
 
       if (res.data.success) {
+        navigate("/");
         toast.success(res.data.message);
       }
     } catch (error) {
       console.log(error.message);
+      toast.error(error.response.data.message);
     }
   };
 

@@ -2,6 +2,7 @@ import React from "react";
 import {Input} from "./ui/input";
 import {Button} from "./ui/button";
 import {Search} from "lucide-react";
+import CategoryCarousle from "./categoryCarousle";
 
 const HeroSection = () => {
   return (
@@ -13,13 +14,11 @@ const HeroSection = () => {
               Search & Apply
               <strong className="text-red-700"> #Get Your Dreame Job! </strong>
             </h1>
-
             <p className="mt-4 text-base text-pretty text-gray-700 sm:text-lg/relaxed">
               Discover the best job opportunities. Join us and take the first
               step towards your dream career.
             </p>
-
-            <div className="mt-4 flex justify-center sm:mt-6">
+            <div className="mt-4 flex justify-center sm:mt-6 mb-10">
               <Input
                 type="text"
                 id="search"
@@ -30,6 +29,9 @@ const HeroSection = () => {
               <Button className="rounded-r-full bg-red-700 text-white hover:bg-red-800 focus:ring-4 focus:ring-red-300">
                 <Search size={20} className=" text-white" />
               </Button>
+            </div>
+            <div>
+              <CategoryCarousle />
             </div>
           </div>
         </div>

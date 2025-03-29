@@ -12,15 +12,15 @@ const Footer = () => {
   return (
     <>
       <footer className="bg-white">
-        <div className="mx-auto max-w-screen-xl px-4 pt-5 pb-5 sm:px-6 lg:px-8 lg:pt-10 border-t border-gray-200">
+        <div className="mx-auto max-w-screen-xl pt-5 pb-5 sm:px-6 lg:px-5 lg:pt-5 border-t border-gray-200">
           <div className="text-center">
             <h2 className="text-3xl font-extrabold text-red-700 sm:text-5xl">
               Find Your Dream Job
             </h2>
 
-            <p className="mx-auto mb-5 mt-4 max-w-sm text-gray-500">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum
-              maiores ipsum eos temporibus ea nihil.
+            <p className="mx-auto max-w-sm text-gray-500">
+              Discover the best job opportunities tailored just for you. Join us
+              and take the first step towards your dream career.
             </p>
           </div>
 

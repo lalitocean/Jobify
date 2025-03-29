@@ -6,6 +6,7 @@ import Browse from "./components/pages/Browse";
 import Contact from "./components/pages/Contact";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+import Home from "./components/pages/Home";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: "/home",
+        element: <Home />,
       },
       {
         path: "/jobs",

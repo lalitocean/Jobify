@@ -27,7 +27,7 @@ const Register = () => {
   // handle file change
 
   const handleFileChange = (e) => {
-    setInput({...input, photo: e.target.files?.[0]});
+    setInput({...input, profile: e.target.files?.[0]});
   };
 
   // Handle form submit
@@ -147,13 +147,10 @@ const Register = () => {
               </RadioGroup>
             </div>
             <div className="mb-5">
-              <Label className="block text-gray-700 mb-3">
-                Profile Photo
-              </Label>
+              <Label className="block text-gray-700 mb-3">Profile Photo</Label>
               <Input
                 type="file"
                 name="profile"
-                
                 onChange={handleFileChange}
                 className="w-full"
                 accept="image/*"

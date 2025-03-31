@@ -23,7 +23,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="bg-whiten border-t border-gray-200 ">
+      <header className="bg-whiten border-t border-gray-200  border-b">
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 ">
           <div className="flex h-16 items-center justify-between">
             <div className="md:flex md:items-center md:gap-12">

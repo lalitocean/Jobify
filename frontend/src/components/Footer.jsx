@@ -13,18 +13,7 @@ const Footer = () => {
     <>
       <footer className="bg-white">
         <div className="mx-auto max-w-screen-xl pt-5 pb-5 sm:px-6 lg:px-5 lg:pt-5 border-t border-gray-200">
-          <div className="text-center">
-            <h2 className="text-3xl font-extrabold text-red-700 sm:text-5xl">
-              Find Your Dream Job
-            </h2>
-
-            <p className="mx-auto max-w-sm text-gray-500">
-              Discover the best job opportunities tailored just for you. Join us
-              and take the first step towards your dream career.
-            </p>
-          </div>
-
-          <div className=" border-t border-gray-200 pt-5 sm:flex sm:items-center sm:justify-between lg:mt-24">
+          <div className=" sm:flex sm:items-center sm:justify-between">
             <ul className="flex flex-wrap justify-center gap-4 text-md lg:justify-center">
               {FooterLinks.map((link) => {
                 return (

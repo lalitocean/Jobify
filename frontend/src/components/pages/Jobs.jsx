@@ -26,7 +26,7 @@ const Jobs = () => {
                 <span className="text-2xl font-mono">Job Not Found:)</span>
               </span>
             ) : (
-              <ul className="grid grid-cols-3 gap-5 ">
+              <ul className="grid grid-cols-3 gap-5 overflow-y-auto h-[70vh] ">
                 {jobesArray.map((job, index) => (
                   <JobCard job={job} index={index} />
                 ))}

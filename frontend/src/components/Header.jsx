@@ -29,7 +29,7 @@ const Header = () => {
             <div className="md:flex md:items-center md:gap-12">
               <Link to="/">
                 <a className="block bg-transparent text-red-700 border-3 rounded-md px-4 py-1.5 font-bold">
-                  <span>Jobify</span>
+                  <span>#Jobify</span>
                 </a>{" "}
               </Link>
             </div>

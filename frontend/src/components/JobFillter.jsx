@@ -26,7 +26,7 @@ const fillterList = [
 
 const JobFillter = () => {
   return (
-    <div className="flex h-[full] p-5">
+    <div className="flex h-[full] p-5 border-2 rounded-3xl">
       <div className="w-[15vw]  ">
         <h1 className="text-2xl ">
           <span className="text-red-700 font-bold">#Fillter</span> Jobs

@@ -6,7 +6,7 @@ const jobesArray = [1, 2, 3, 4, 5, 6];
 const Jobs = () => {
   return (
     <>
-      <div className=" m-auto max-w-screen-xl my-5 ">
+      <div className=" m-auto max-w-screen-xl my-5">
         <div className="flex justify-center">
           {/* Job fillter */}
           <JobFillter />

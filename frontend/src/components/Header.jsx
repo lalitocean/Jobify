@@ -80,7 +80,7 @@ const Header = () => {
                           />
                         </Avatar>
                       </PopoverTrigger>
-                      <PopoverContent className="w-50 mt-10 shadow-2xs">
+                      <PopoverContent className="w-50 mt-10 shadow-2xs bg-white text-black p-4 flex flex-col">
                         <div className="flex gap-2 space-y-2 ">
                           <Avatar>
                             <AvatarImage
@@ -96,10 +96,10 @@ const Header = () => {
                           <div className="flex space-x-2c w-fit items-center ">
                             <User />
                             <Button className="border-none" variant="link">
-                              view profile
+                              <Link to="/profile">View Profile</Link>
                             </Button>
                           </div>
-                          <div className="flex gap-1 space-x-2 w-fit items-center ">
+                          <div className="flex  space-x-2 w-fit items-center ">
                             <LogOut />
                             <Button variant="link">logout</Button>
                           </div>

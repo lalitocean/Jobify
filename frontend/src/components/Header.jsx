@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import {Popover, PopoverTrigger, PopoverContent} from "@radix-ui/react-popover";
 import {Avatar, AvatarImage} from "./ui/avatar";
 import {Button} from "./ui/button";
+import {useSelector} from "react-redux";
 
 const Header = () => {
   const NavLinks = [
@@ -19,8 +20,7 @@ const Header = () => {
     setOpen(!open);
   };
 
-  const user = false;
-
+  const {user} = useSelector((store) => store.auth);
   return (
     <>
       <header className="bg-whiten border-t border-gray-200  border-b">

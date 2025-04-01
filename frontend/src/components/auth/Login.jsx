@@ -7,7 +7,11 @@ import {USER_API} from "@/utils/constant";
 import axios from "axios";
 import {toast} from "sonner";
 import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import { setUser } from "@/redux/authSlice";
+
 const Login = () => {
+  // Initial state for input fields
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -15,6 +19,7 @@ const Login = () => {
   });
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // Handle input change
   const handleChange = (e) => {
@@ -32,6 +37,8 @@ const Login = () => {
       });
 
       if (res.data.success) {
+        // Dispatch user data to Redux store
+        dispatch(setUser(res.data.user));
         navigate("/");
         toast.success(res.data.message);
       }

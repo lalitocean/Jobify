@@ -2,13 +2,18 @@ import {Contact, Mail, Pen} from "lucide-react";
 import {Avatar, AvatarImage} from "./ui/avatar";
 import {Button} from "./ui/button";
 import {Badge} from "./ui/badge";
-import {Label} from "@radix-ui/react-label";
 import AppliedJobTable from "./appliedJobTable";
+import UpdateProfileDialog from "./UpdateProfileDialog";
+import {useState} from "react";
+import {Label} from "./ui/label";
 
 const skills = ["JavaScript", "React", "Node.js"];
 
 const profile = () => {
-  const isResume = true; // Replace with actual condition to check if resume is available
+  const [open, setOpen] = useState(false);
+
+  const isResume = true;
+
   return (
     <div className="mx-auto max-w-screen-xl px-4 sm:px-6 h-auto mb-10 mt-10 bg-white border-2 border-gray-100 rounded-2xl shadow-1xl p-5">
       <div className="">
@@ -24,6 +29,7 @@ const profile = () => {
               <h2 className="text-2xl font-bold text-center py-3">John Doe</h2>
               <div>
                 <Button
+                  onClick={() => setOpen(true)}
                   variant="outline"
                   className="bg-red-600  text-white rounded-md shadow-sm hover:bg-red-700 hover:text-white transition duration-200"
                 >
@@ -86,6 +92,7 @@ const profile = () => {
           <AppliedJobTable />
         </div>
       </div>
+      <UpdateProfileDialog open={open} setOpen={setOpen} />
     </div>
   );
 };

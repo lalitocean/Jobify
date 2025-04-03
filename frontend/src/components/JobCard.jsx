@@ -2,8 +2,11 @@ import {Bookmark} from "lucide-react";
 import {Badge} from "./ui/badge";
 import {Button} from "./ui/button";
 import {Avatar, AvatarImage} from "./ui/avatar";
+import {useNavigate} from "react-router-dom";
 
 const JobCard = ({index}) => {
+  const navigate = useNavigate();
+  const jobId = "rw4t43t4";
   return (
     <div
       key={index}
@@ -41,7 +44,10 @@ const JobCard = ({index}) => {
           <Badge variant="ghost">12 position</Badge>
         </div>
         <div className="flex  gap-5 itmes-center mt-3">
-          <Button className="shadow-2xs bg-red-600 hover:bg-red-700 font-semibold">
+          <Button
+            onClick={() => navigate(`/deatils/${jobId}`)}
+            className="shadow-2xs bg-red-600 hover:bg-red-700 font-semibold"
+          >
             Apply
           </Button>
         </div>

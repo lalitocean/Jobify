@@ -1,12 +1,13 @@
 import React from "react";
 import {Badge} from "./ui/badge";
 
-const LatestJobCards = ({index}) => {
+const LatestJobCards = ({index, job}) => {
   return (
     <div key={index}>
       <div className=" bg-white border-2 border-gray-100 rounded-2xl shadow-1xl  cursor-pointer p-5">
         <div>
-          <h2 className="font-medium text-lg">Company Name</h2>
+          {job}
+          <h2 className="font-medium text-lg">Company Name </h2>
           <p className="text-sm text-gray-500">Loation</p>
         </div>
         <div className="pt-2 pb-2">

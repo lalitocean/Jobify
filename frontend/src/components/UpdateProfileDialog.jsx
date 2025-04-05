@@ -1,10 +1,45 @@
-import React from "react";
+import React, {useState} from "react";
 import {Dialog, DialogContent, DialogHeader} from "./ui/dialog";
 import {Label} from "./ui/label";
 import {Input} from "./ui/input";
 import {Button} from "./ui/button";
+import {useSelector} from "react-redux";
 
 const UpdateProfileDialog = ({open, setOpen}) => {
+  const {user} = useSelector((store) => store.auth);
+
+  const [input, setInput] = useState({
+    fullName: user?.fullName,
+    email: user?.email,
+    phoneNumber: user?.phoneNumber,
+    bio: user?.profile?.bio,
+    skills: user?.profile?.skills?.map((skill) => skill),
+    file: user?.profile?.resume,
+  });
+
+  const changeEventHandler = (e) => {
+    setInput({...input, [e.target.name]: e.target.value});
+  };
+
+  const fileHandler = (e) => {
+    const file = e.target.files?.[0];
+    setInput({...input, file});
+  };
+
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("fullName", input.fullName);
+    formData.append("email", input.email);
+    formData.append("phoneNumber", input.phoneNumber);
+    formData.append("bio", input.bio);
+    formData.append("skills", input.skills);
+
+    if (input.file) {
+      formData.append("file", input.file);
+    }
+  };
+
   return (
     <>
       <Dialog open={open}>
@@ -13,21 +48,34 @@ const UpdateProfileDialog = ({open, setOpen}) => {
           onInteractOutside={() => setOpen(false)}
         >
           <DialogHeader>Update Profile</DialogHeader>
-          <form action="">
+          <form onSubmit={formSubmitHandler}>
             <div>
               {/* FullName */}
               <div className="grid gap-3 mb-3">
                 <Label htmlFor="fullname" className="">
                   Full Name
                 </Label>
-                <Input className="" type="text" name="fullname" id="fullName" />
+                <Input
+                  className=""
+                  value={input.fullName}
+                  onChange={changeEventHandler}
+                  type="text"
+                  name="fullName"
+                />
               </div>
               {/* Email */}
               <div className="grid gap-3 mb-3">
                 <Label htmlFor="email" className="">
                   Email
                 </Label>
-                <Input className="" type="text" name="email" id="email" />
+                <Input
+                  className=""
+                  value={input.email}
+                  onChange={changeEventHandler}
+                  type="text"
+                  name="email"
+                  id="email"
+                />
               </div>
               {/* PhoneNumber */}
               <div className="grid gap-3 mb-3">
@@ -36,9 +84,10 @@ const UpdateProfileDialog = ({open, setOpen}) => {
                 </Label>
                 <Input
                   className=""
+                  value={input.phoneNumber}
+                  onChange={changeEventHandler}
                   type="text"
-                  name="phonenumber"
-                  id="phonenumber"
+                  name="phoneNumber"
                 />
               </div>
               {/* Bio */}
@@ -46,14 +95,26 @@ const UpdateProfileDialog = ({open, setOpen}) => {
                 <Label htmlFor="bio" className="">
                   Bio
                 </Label>
-                <Input className="" type="text" name="bio" id="bio" />
+                <Input
+                  className=""
+                  value={input.bio}
+                  onChange={changeEventHandler}
+                  type="text"
+                  name="bio"
+                />
               </div>
               {/* Skills */}
               <div className="grid gap-3 mb-3">
                 <Label htmlFor="skills" className="">
                   Skills
                 </Label>
-                <Input className="" type="text" name="skills" id="skills" />
+                <Input
+                  className=""
+                  value={input.skills}
+                  onChange={changeEventHandler}
+                  type="text"
+                  name="skills"
+                />
               </div>
               {/* Resume */}
               <div className="grid gap-3 mb-5">
@@ -63,6 +124,7 @@ const UpdateProfileDialog = ({open, setOpen}) => {
                 <Input
                   className=""
                   type="file"
+                  onChange={fileHandler}
                   name="resume"
                   id="resume"
                   accept="application/pdf"

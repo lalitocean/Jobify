@@ -63,7 +63,7 @@ const Register = () => {
 
   return (
     <>
-      <section className=" pt-10 pb-10">
+      <section className="pt-10 pb-10">
         <div className="max-w-2xl mx-auto border-1 shadow-2xs rounded-2xl">
           <form className="bg-white px-10 py-5" onSubmit={handleSubmit}>
             {/* full Name */}

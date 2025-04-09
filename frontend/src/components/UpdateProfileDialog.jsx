@@ -3,7 +3,10 @@ import {Dialog, DialogContent, DialogHeader} from "./ui/dialog";
 import {Label} from "./ui/label";
 import {Input} from "./ui/input";
 import {Button} from "./ui/button";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import axios from "axios";
+import {USER_API_END_POINT} from "@/utils/constant";
+import {toast} from "sonner";
 
 const UpdateProfileDialog = ({open, setOpen}) => {
   const {user} = useSelector((store) => store.auth);
@@ -26,7 +29,9 @@ const UpdateProfileDialog = ({open, setOpen}) => {
     setInput({...input, file});
   };
 
-  const formSubmitHandler = (e) => {
+  const dispatch = useDispatch();
+
+  const formSubmitHandler = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("fullName", input.fullName);
@@ -38,6 +43,29 @@ const UpdateProfileDialog = ({open, setOpen}) => {
     if (input.file) {
       formData.append("file", input.file);
     }
+
+    try {
+      const res = await axios.post(
+        `${USER_API_END_POINT}/profile/update`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form/data",
+          },
+          withCredentials: true,
+        }
+      );
+
+      if (res.data.success) {
+        dispatch(setInput(res.data.user));
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+      toast.error(error.response.data.message);
+    }
+
+    setOpen(false);
   };
 
   return (
@@ -52,7 +80,7 @@ const UpdateProfileDialog = ({open, setOpen}) => {
             <div>
               {/* FullName */}
               <div className="grid gap-3 mb-3">
-                <Label htmlFor="fullname" className="">
+                <Label htmlFor="fullName" className="">
                   Full Name
                 </Label>
                 <Input
@@ -79,7 +107,7 @@ const UpdateProfileDialog = ({open, setOpen}) => {
               </div>
               {/* PhoneNumber */}
               <div className="grid gap-3 mb-3">
-                <Label htmlFor="phonenumber" className="">
+                <Label htmlFor="phoneNumber" className="">
                   Phone Number
                 </Label>
                 <Input

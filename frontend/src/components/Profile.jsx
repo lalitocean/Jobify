@@ -9,14 +9,12 @@ import {Label} from "./ui/label";
 
 const skills = ["JavaScript", "React", "Node.js"];
 
-const profile = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+const Profile = () => {
   const [open, setOpen] = useState(false);
 
   const isResume = true;
 
   return (
-    
     <div className="mx-auto max-w-screen-xl px-4 sm:px-6 h-auto mb-10 mt-10 bg-white border-2 border-gray-100 rounded-2xl shadow-1xl p-5">
       <div className="">
         <div className="flex flex-col justify-center items-center">
@@ -99,4 +97,4 @@ const profile = () => {
   );
 };
 
-export default profile;
+export default Profile;

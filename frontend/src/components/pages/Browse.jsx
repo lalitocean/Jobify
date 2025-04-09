@@ -1,5 +1,4 @@
 import JobCard from "../JobCard";
-import Jobs from "./Jobs";
 
 const jobs = [1, 2, 3, 4, 5, 6];
 

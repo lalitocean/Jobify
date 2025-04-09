@@ -4,7 +4,7 @@ import {Label} from "../ui/label";
 import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import axios from "axios";
-import {USER_API} from "@/utils/constant";
+import {USER_API_END_POINT} from "@/utils/constant";
 import {toast} from "sonner";
 
 const Register = () => {
@@ -45,7 +45,7 @@ const Register = () => {
     if (input.photo) formData.append("photo", input.photo);
 
     try {
-      const res = await axios.post(`${USER_API}/register`, formData, {
+      const res = await axios.post(`${USER_API_END_POINT}/register`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

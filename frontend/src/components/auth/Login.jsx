@@ -3,12 +3,12 @@ import {RadioGroup} from "../ui/radio-group";
 import {Label} from "../ui/label";
 import {Link} from "react-router-dom";
 import {useState} from "react";
-import {USER_API} from "@/utils/constant";
+import {USER_API_END_POINT} from "@/utils/constant";
 import axios from "axios";
 import {toast} from "sonner";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import { setUser } from "@/redux/authSlice";
+import {setUser} from "@/redux/authSlice";
 
 const Login = () => {
   // Initial state for input fields
@@ -29,7 +29,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${USER_API}/login`, input, {
+      const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
         headers: {
           "Content-Type": "application/json",
         },

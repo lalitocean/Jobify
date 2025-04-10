@@ -1,11 +1,11 @@
 import {Contact, Mail, Pen} from "lucide-react";
-import {Avatar, AvatarImage} from "./ui/avatar";
-import {Button} from "./ui/button";
-import {Badge} from "./ui/badge";
-import UpdateProfileDialog from "./UpdateProfileDialog";
+import {Avatar, AvatarImage} from "../ui/avatar";
+import {Button} from "../ui/button";
+import {Badge} from "../ui/badge";
+import UpdateProfileDialog from "../UpdateProfileDialog";
 import {useState} from "react";
-import {Label} from "./ui/label";
-import {AppliedJobTable} from "./AppliedJobTable";
+import {Label} from "../ui/label";
+import {AppliedJobTable} from "../AppliedJobTable";
 
 const skills = ["JavaScript", "React", "Node.js"];
 

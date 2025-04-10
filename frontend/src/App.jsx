@@ -7,8 +7,8 @@ import Contact from "./components/pages/Contact";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Home from "./components/pages/Home";
-import JobDeatils from "./components/JobDeatils";
 import Profile from "./components/Profile";
+import JobDeatils from "./components/JobDeatils";
 
 const router = createBrowserRouter([
   {

@@ -1,15 +1,13 @@
-import React from "react";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableHead,
   TableHeader,
   TableRow,
   TableCell,
 } from "./ui/table";
 
-const AppliedJobTable = () => {
+export const AppliedJobTable = () => {
   return (
     <Table>
       <TableHeader>
@@ -33,5 +31,3 @@ const AppliedJobTable = () => {
     </Table>
   );
 };
-
-export default AppliedJobTable;

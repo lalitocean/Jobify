@@ -12,8 +12,8 @@ const LatestJobes = () => {
           </h2>
         </dir>
         <div className="grid  gap-6 lg:grid-cols-3 md:grid-cols-2 ">
-          {LatestJobOpenings.map((job, index) => (
-            <LatestJobCards job={job} index={index} />
+          {LatestJobOpenings.map((job, i) => (
+            <LatestJobCards job={job} i={i} />
           ))}
         </div>
       </div>

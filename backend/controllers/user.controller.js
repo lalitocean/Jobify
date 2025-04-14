@@ -96,7 +96,7 @@ export const login = async (req, res) => {
     };
 
     const token = jwt.sign(tokenDate, process.env.SECRET_KEY, {
-      expiresIn: "7d",
+      expiresIn: "1d",
     });
 
     //   token to store in cookie
@@ -142,9 +142,11 @@ export const profileUpdate = async (req, res) => {
   try {
     const {fullName, email, phoneNumber, bio, skills} = req.body;
 
+    const file = req.file;
+
     let skillsArray;
     if (skills) {
-      skillsArray = skills.split(",");
+      skillsArray = skills.split(", ");
     }
     const userId = req.id;
     let user = await User.findById(userId);
@@ -160,8 +162,8 @@ export const profileUpdate = async (req, res) => {
     if (fullName) user.fullName = fullName;
     if (email) user.email = email;
     if (phoneNumber) user.phoneNumber = phoneNumber;
-    if (bio) user.bio = bio;
-    if (skills) user.skills = skillsArray;
+    if (bio) user.profile.bio = bio;
+    if (skills) user.profile.skills = skillsArray;
 
     await user.save();
 
@@ -176,6 +178,7 @@ export const profileUpdate = async (req, res) => {
 
     return res.status(200).json({
       message: "Profile Updated successfully",
+      user,
       success: true,
     });
   } catch (error) {

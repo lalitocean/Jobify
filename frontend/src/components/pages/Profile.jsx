@@ -6,11 +6,12 @@ import UpdateProfileDialog from "../UpdateProfileDialog";
 import {useState} from "react";
 import {Label} from "../ui/label";
 import {AppliedJobTable} from "../AppliedJobTable";
-
-const skills = ["JavaScript", "React", "Node.js"];
+import {useSelector} from "react-redux";
 
 const Profile = () => {
   const [open, setOpen] = useState(false);
+
+  const {user} = useSelector((store) => store.auth);
 
   const isResume = true;
 
@@ -26,7 +27,9 @@ const Profile = () => {
           </Avatar>
           <div>
             <div className="flex justify-center gap-5 items-center w-full mt-4">
-              <h2 className="text-2xl font-bold text-center py-3">John Doe</h2>
+              <h2 className="text-2xl font-bold text-center py-3">
+                {user?.fullName}
+              </h2>
               <div>
                 <Button
                   onClick={() => setOpen(true)}
@@ -38,25 +41,22 @@ const Profile = () => {
               </div>
             </div>
 
-            <p className="text-gray-600">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Dignissimos, ex.
-            </p>
+            <p className="text-gray-600">{user?.profile?.bio}</p>
           </div>
           {/* contact info */}
           <div className="flex flex-col justify-center items-center ">
             <div className="flex justify-center gap-2 items-center w-full mt-4 ">
               <Mail />
-              <span>example@gmail.com</span>
+              <span>{user?.email}</span>
             </div>
             <div className="flex justify-center gap-2 items-center w-full mt-3 mb-5 ">
               <Contact />
-              <span>1234567890</span>
+              <span>{user?.phoneNumber}</span>
             </div>
             <div>
               <span>Skills : </span>
-              {skills.length > 0 ? (
-                skills.map((skill, index) => (
+              {user?.profile?.skills.length > 0 ? (
+                user?.profile?.skills.map((skill, index) => (
                   <Badge className="text-red-700" variant="outline" key={index}>
                     {skill}
                   </Badge>
@@ -71,9 +71,7 @@ const Profile = () => {
                     className="text-red-700 underline font-semibold"
                     target="_blank"
                     href="/path/to/resume.pdf"
-                  >
-                    jhon Doe Resume
-                  </a>
+                  ></a>
                 ) : (
                   <span className="text-gray-500">No resume uploaded</span>
                 )}

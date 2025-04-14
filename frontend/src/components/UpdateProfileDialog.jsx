@@ -1,5 +1,11 @@
 import React, {useState} from "react";
-import {Dialog, DialogContent, DialogHeader} from "./ui/dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+} from "./ui/dialog";
 import {Label} from "./ui/label";
 import {Input} from "./ui/input";
 import {Button} from "./ui/button";
@@ -7,8 +13,10 @@ import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import {USER_API_END_POINT} from "@/utils/constant";
 import {toast} from "sonner";
+import {setUser} from "@/redux/authSlice";
 
 const UpdateProfileDialog = ({open, setOpen}) => {
+  // user form redux store
   const {user} = useSelector((store) => store.auth);
 
   const [input, setInput] = useState({
@@ -50,22 +58,26 @@ const UpdateProfileDialog = ({open, setOpen}) => {
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form/data",
+            "Content-Type": "multipart/form-data",
           },
           withCredentials: true,
         }
       );
 
       if (res.data.success) {
-        dispatch(setInput(res.data.user));
+        dispatch(setUser(res.data.user));
         toast.success(res.data.message);
+        setOpen(false);
       }
     } catch (error) {
-      console.log(error.message);
-      toast.error(error.response.data.message);
-    }
+      console.log("error", error);
 
-    setOpen(false);
+      if (error.response) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("An unexpected error occurred. Please try again.");
+      }
+    }
   };
 
   return (
@@ -80,11 +92,8 @@ const UpdateProfileDialog = ({open, setOpen}) => {
             <div>
               {/* FullName */}
               <div className="grid gap-3 mb-3">
-                <Label htmlFor="fullName" className="">
-                  Full Name
-                </Label>
+                <Label htmlFor="fullName">Full Name </Label>
                 <Input
-                  className=""
                   value={input.fullName}
                   onChange={changeEventHandler}
                   type="text"
@@ -124,7 +133,6 @@ const UpdateProfileDialog = ({open, setOpen}) => {
                   Bio
                 </Label>
                 <Input
-                  className=""
                   value={input.bio}
                   onChange={changeEventHandler}
                   type="text"
@@ -159,9 +167,12 @@ const UpdateProfileDialog = ({open, setOpen}) => {
                 />
               </div>
             </div>
-            <Button className="bg-red-600 hover:bg-red-700 w-full">
-              Save Changes
-            </Button>
+            <DialogFooter>
+              <DialogClose asChild></DialogClose>
+              <Button className="bg-red-600 hover:bg-red-700 w-full">
+                Save Changes
+              </Button>
+            </DialogFooter>
           </form>
         </DialogContent>
       </Dialog>

@@ -12,6 +12,8 @@ const router = express.Router();
 
 router.route("/register").post(multerUpload, register);
 router.route("/login").post(login);
-router.route("/profile/update").post(isAuthenticated, profileUpdate);
+router
+  .route("/profile/update")
+  .post(isAuthenticated, multerUpload, profileUpdate);
 router.route("/logout").get(logout);
 export default router;

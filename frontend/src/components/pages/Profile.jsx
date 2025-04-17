@@ -13,17 +13,14 @@ const Profile = () => {
 
   const {user} = useSelector((store) => store.auth);
 
-  const isResume = true;
+  const isResume = user?.profile?.resume;
 
   return (
     <div className="mx-auto max-w-screen-xl px-4 sm:px-6 h-auto mb-10 mt-10 bg-white border-2 border-gray-100 rounded-2xl shadow-1xl p-5">
       <div className="">
         <div className="flex flex-col justify-center items-center">
           <Avatar className="w-24 h-24 border-2 border-gray-200 rounded-2xl shadow-sm">
-            <AvatarImage
-              src="https://example.com/profile.jpg"
-              alt="Profile Picture"
-            />
+            <AvatarImage src="" alt="Profile Picture" />
           </Avatar>
           <div>
             <div className="flex justify-center gap-5 items-center w-full mt-4">
@@ -41,7 +38,9 @@ const Profile = () => {
               </div>
             </div>
 
-            <p className="text-gray-600">{user?.profile?.bio}</p>
+            <p className="text-gray-600 max-w-2xl text-center">
+              {user?.profile?.bio}
+            </p>
           </div>
           {/* contact info */}
           <div className="flex flex-col justify-center items-center ">
@@ -54,7 +53,7 @@ const Profile = () => {
               <span>{user?.phoneNumber}</span>
             </div>
             <div>
-              <span>Skills : </span>
+              <span className="font-semibold">Skills : </span>
               {user?.profile?.skills.length > 0 ? (
                 user?.profile?.skills.map((skill, index) => (
                   <Badge className="text-red-700" variant="outline" key={index}>
@@ -68,10 +67,12 @@ const Profile = () => {
                 <Label>Resume : </Label>
                 {isResume ? (
                   <a
-                    className="text-red-700 underline font-semibold"
+                    className="text-red-700 underline text-sm font-bold"
                     target="_blank"
-                    href="/path/to/resume.pdf"
-                  ></a>
+                    href={user?.profile?.resume}
+                  >
+                    {user?.profile?.resumeOriginalName}
+                  </a>
                 ) : (
                   <span className="text-gray-500">No resume uploaded</span>
                 )}

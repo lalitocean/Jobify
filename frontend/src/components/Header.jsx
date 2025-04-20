@@ -1,10 +1,14 @@
 import {useState} from "react";
 import {LogOut, Menu, User, X} from "lucide-react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Popover, PopoverTrigger, PopoverContent} from "@radix-ui/react-popover";
 import {Avatar, AvatarImage} from "./ui/avatar";
 import {Button} from "./ui/button";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {toast} from "sonner";
+import axios from "axios";
+import {USER_API_END_POINT} from "@/utils/constant";
+import {setUser} from "@/redux/authSlice";
 
 const Header = () => {
   const NavLinks = [
@@ -18,6 +22,26 @@ const Header = () => {
 
   const toggleNav = () => {
     setOpen(!open);
+  };
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logoutHandler = async () => {
+    try {
+      const res = await axios.get(`${USER_API_END_POINT}/logout`, {
+        withCredentials: true,
+      });
+
+      if (res.data.success) {
+        dispatch(setUser(null));
+        navigate("/");
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      console.log("Error", error.message);
+      toast.error(error.response.message);
+    }
   };
 
   const {user} = useSelector((store) => store.auth);
@@ -101,7 +125,9 @@ const Header = () => {
                           </div>
                           <div className="flex  space-x-2 w-fit items-center ">
                             <LogOut />
-                            <Button variant="link">logout</Button>
+                            <Button onClick={logoutHandler} variant="link">
+                              logout
+                            </Button>
                           </div>
                         </div>
                       </PopoverContent>

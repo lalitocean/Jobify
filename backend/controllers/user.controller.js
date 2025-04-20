@@ -19,6 +19,11 @@ export const register = async (req, res) => {
         success: false,
       });
     }
+
+    const file = req.file;
+    const fileUri = getDataUri(file);
+    const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+
     // user alrady exist logic
     const user = await User.findOne({email});
     if (user) {
@@ -38,6 +43,9 @@ export const register = async (req, res) => {
       phoneNumber,
       password: hashedPassword,
       role,
+      profile: {
+        profilePhoto: cloudResponse.secure_url,
+      },
     });
 
     // all true
@@ -146,8 +154,11 @@ export const profileUpdate = async (req, res) => {
 
     // cloudinary to upload file
     const file = req.file;
+
+    console.log(file);
+
     const fileUri = getDataUri(file);
-    const cloudRes = await cloudinary.uploader.upload(fileUri.content);
+    const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
 
     let skillsArray;
     if (skills) {
@@ -173,7 +184,7 @@ export const profileUpdate = async (req, res) => {
     // updating resume
 
     if (cloudinary) {
-      user.profile.resume = cloudRes.secure_url; // save image url
+      user.profile.resume = cloudResponse.secure_url; // save image url
       user.profile.resumeOriginalName = file.originalname; // same file orignal name
     }
 

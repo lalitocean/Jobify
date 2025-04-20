@@ -99,8 +99,8 @@ const Header = () => {
                       <PopoverTrigger asChild>
                         <Avatar>
                           <AvatarImage
-                            src="https://github.com/shadcn.png"
-                            alt="@shadcn"
+                            src={user?.profile?.profilePhoto}
+                            alt="profilePhoto"
                           />
                         </Avatar>
                       </PopoverTrigger>
@@ -108,8 +108,8 @@ const Header = () => {
                         <div className="flex gap-2 space-y-2 ">
                           <Avatar>
                             <AvatarImage
-                              src="https://github.com/shadcn.png"
-                              alt="@shadcn"
+                              src={user?.profile?.profilePhoto}
+                              alt="profilePhoto"
                             />
                           </Avatar>
                           <h4 className=" font-sans text-foreground">

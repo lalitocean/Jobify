@@ -20,7 +20,10 @@ const Profile = () => {
       <div className="">
         <div className="flex flex-col justify-center items-center">
           <Avatar className="w-24 h-24 border-2 border-gray-200 rounded-2xl shadow-sm">
-            <AvatarImage src="" alt="Profile Picture" />
+            <AvatarImage
+              src={user?.profile?.profilePhoto}
+              alt="Profile Picture"
+            />
           </Avatar>
           <div>
             <div className="flex justify-center gap-5 items-center w-full mt-4">

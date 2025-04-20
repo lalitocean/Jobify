@@ -162,7 +162,6 @@ const UpdateProfileDialog = ({open, setOpen}) => {
                   type="file"
                   onChange={fileHandler}
                   name="resume"
-                  id="resume"
                   accept="application/pdf"
                 />
               </div>

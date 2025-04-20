@@ -42,7 +42,7 @@ const Register = () => {
     formData.append("password", input.password);
     formData.append("role", input.role);
 
-    if (input.photo) formData.append("photo", input.photo);
+    if (input.profile) formData.append("file", input.profile);
 
     try {
       const res = await axios.post(`${USER_API_END_POINT}/register`, formData, {
@@ -150,7 +150,6 @@ const Register = () => {
               <Label className="block text-gray-700 mb-3">Profile Photo</Label>
               <Input
                 type="file"
-                name="profile"
                 onChange={handleFileChange}
                 className="w-full"
                 accept="image/*"

@@ -1,8 +1,8 @@
+import {useSelector} from "react-redux";
 import LatestJobCards from "./LatestJobCards";
 
-const LatestJobOpenings = [1, 2, 3, 4, 5, 6];
-
 const LatestJobes = () => {
+  const {allJobs} = useSelector((store) => store.jobs);
   return (
     <>
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 h-auto mb-10">
@@ -12,8 +12,10 @@ const LatestJobes = () => {
           </h2>
         </dir>
         <div className="grid  gap-6 lg:grid-cols-3 md:grid-cols-2 ">
-          {LatestJobOpenings.map((job, i) => (
-            <LatestJobCards job={job} i={i} />
+          {allJobs.map((job) => (
+            <div key={job?._id}>
+              <LatestJobCards job={job} />
+            </div>
           ))}
         </div>
       </div>

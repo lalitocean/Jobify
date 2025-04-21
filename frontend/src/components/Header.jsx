@@ -113,7 +113,7 @@ const Header = () => {
                             />
                           </Avatar>
                           <h4 className=" font-sans text-foreground">
-                            Hi, User
+                            Hi, {user?.fullName}
                           </h4>
                         </div>
                         <div className="flex flex-col">

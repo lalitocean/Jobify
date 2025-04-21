@@ -5,17 +5,15 @@ const fillterList = [
   {
     fillterType: "Role Wise",
     fillterData: [
-      "web developer",
       "Software Developer",
-      " Front-End Developer",
+      "Front-End Developer",
       "Back-End Developer",
       "Full-Stack Developer",
-      "Data Scientist",
     ],
   },
   {
     fillterType: "Location Wise",
-    fillterData: ["Delhi", "Noida", "Banglore", "Hadrabad"],
+    fillterData: ["Noida", "Banglore", "Hadrabad"],
   },
 
   {
@@ -26,7 +24,7 @@ const fillterList = [
 
 const JobFillter = () => {
   return (
-    <div className="flex h-[full] p-5 border-2 rounded-3xl">
+    <div className="flex h-fit p-5 border-2 rounded-3xl">
       <div className="w-[15vw]  ">
         <h1 className="text-2xl ">
           <span className="text-red-700 font-bold">#Fillter</span> Jobs

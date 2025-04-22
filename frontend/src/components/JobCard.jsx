@@ -7,10 +7,21 @@ import {useNavigate} from "react-router-dom";
 const JobCard = ({job}) => {
   const navigate = useNavigate();
 
+  const timeCalFun = (mongodbTime) => {
+    const createdAt = new Date(mongodbTime);
+    const currentTime = new Date();
+    const timecalculate = currentTime - createdAt;
+    return Math.floor(timecalculate / (1000 * 24 * 60 * 60));
+  };
+
   return (
     <div className=" bg-white border-2 border-gray-100 rounded-2xl shadow-1xl  cursor-pointer p-3">
       <div className="flex justify-between items-center">
-        <Badge variant="outline"></Badge>
+        <Badge variant="outline">
+          {timeCalFun(job?.createdAt) == 0
+            ? "Today"
+            : ` ${timeCalFun(job?.createdAt)}, days ago`}
+        </Badge>
         <Button variant="outline" className="rounded-full">
           <Bookmark />
         </Button>
@@ -20,7 +31,7 @@ const JobCard = ({job}) => {
         <div className="mt-5 flex items-center gap-5 ">
           <Button variant="outline" size="icon" className="w-16 h-16 my-2">
             <Avatar>
-              <AvatarImage src="https://st3.depositphotos.com/43745012/44906/i/450/depositphotos_449066958-stock-photo-financial-accounting-logo-financial-logo.jpg"></AvatarImage>
+              <AvatarImage src=""></AvatarImage>
             </Avatar>
           </Button>
           <div>

@@ -11,11 +11,16 @@ import {USER_API_END_POINT} from "@/utils/constant";
 import {setUser} from "@/redux/authSlice";
 
 const Header = () => {
-  const NavLinks = [
+  const UserNavLinks = [
     {name: "Home", path: "/"},
     {name: "Jobs", path: "/jobs"},
     {name: "Browse", path: "/browse"},
     {name: "Contact", path: "/contact"},
+  ];
+
+  const adminNavLinks = [
+    {name: "Add Jobs", path: "admin/jobs"},
+    {name: "Companies", path: "/admin"},
   ];
 
   const [open, setOpen] = useState(false);
@@ -60,17 +65,29 @@ const Header = () => {
             <div className="hidden md:block">
               <nav>
                 <ul className="flex items-center gap-6 text-md ">
-                  {NavLinks.map((link) => {
-                    return (
-                      <Link
-                        key={link.name}
-                        to={link.path}
-                        className="text-gray-600 hover:text-red-700 transition-colors font-medium"
-                      >
-                        {link.name}
-                      </Link>
-                    );
-                  })}
+                  {user && user.role === "recruiter"
+                    ? adminNavLinks.map((link) => {
+                        return (
+                          <Link
+                            key={link.name}
+                            to={link.path}
+                            className="text-gray-600 hover:text-red-700 transition-colors font-medium"
+                          >
+                            {link.name}
+                          </Link>
+                        );
+                      })
+                    : UserNavLinks.map((link) => {
+                        return (
+                          <Link
+                            key={link.name}
+                            to={link.path}
+                            className="text-gray-600 hover:text-red-700 transition-colors font-medium"
+                          >
+                            {link.name}
+                          </Link>
+                        );
+                      })}
                 </ul>
               </nav>
             </div>
@@ -144,15 +161,29 @@ const Header = () => {
                 </button>
                 {open && (
                   <div className="xl:hidden absolute bg-gray-100 w-[50vw] top-[65px] z-0 flex flex-col right-0 text-black text-center py-5 pb-5 gap-10 font-bold max-h-[90vh] ">
-                    {NavLinks.map((link) => (
-                      <Link
-                        key={link.name}
-                        to={link.path}
-                        className="hover:underline hover:text-red-700"
-                      >
-                        {link.name}
-                      </Link>
-                    ))}
+                    {user && user.role === "recruiter"
+                      ? adminNavLinks.map((link) => {
+                          return (
+                            <Link
+                              key={link.name}
+                              to={link.path}
+                              className="text-gray-600 hover:text-red-700 transition-colors font-medium"
+                            >
+                              {link.name}
+                            </Link>
+                          );
+                        })
+                      : UserNavLinks.map((link) => {
+                          return (
+                            <Link
+                              key={link.name}
+                              to={link.path}
+                              className="text-gray-600 hover:text-red-700 transition-colors font-medium"
+                            >
+                              {link.name}
+                            </Link>
+                          );
+                        })}
                   </div>
                 )}
               </div>

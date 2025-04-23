@@ -20,7 +20,7 @@ const Header = () => {
 
   const adminNavLinks = [
     {name: "Add Jobs", path: "admin/jobs"},
-    {name: "Companies", path: "/admin"},
+    {name: "Companies", path: "/admin/companies"},
   ];
 
   const [open, setOpen] = useState(false);
@@ -135,10 +135,14 @@ const Header = () => {
                         </div>
                         <div className="flex flex-col">
                           <div className="flex space-x-2c w-fit items-center ">
-                            <User />
-                            <Button className="border-none" variant="link">
-                              <Link to="/profile">View Profile</Link>
-                            </Button>
+                            {user && user.role === "student" ? (
+                              <>
+                                <User />
+                                <Button className="border-none" variant="link">
+                                  <Link to="/profile">View Profile</Link>
+                                </Button>
+                              </>
+                            ) : null}
                           </div>
                           <div className="flex  space-x-2 w-fit items-center ">
                             <LogOut />

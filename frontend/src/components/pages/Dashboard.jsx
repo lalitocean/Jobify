@@ -5,7 +5,7 @@ import {Button} from "../ui/button";
 import CompaniesTable from "../CompaniesTable";
 import {useNavigate} from "react-router-dom";
 
-const Companies = () => {
+const Dashboard = () => {
   const navigate = useNavigate();
   return (
     <>
@@ -19,7 +19,7 @@ const Companies = () => {
             placeholder="filter, Serach by Name"
           />
           <Button
-            onClick={() => navigate("/admin/company/create")}
+            onClick={() => navigate("/recruiter/company/create")}
             className="bg-red-600 hover:bg-red-700"
           >
             Add New Company
@@ -35,4 +35,4 @@ const Companies = () => {
   );
 };
 
-export default Companies;
+export default Dashboard;

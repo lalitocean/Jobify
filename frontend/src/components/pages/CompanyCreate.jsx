@@ -1,29 +1,70 @@
 import {useNavigate} from "react-router-dom";
 import {Button} from "../ui/button";
 import {Input} from "../ui/input";
+import {useState} from "react";
+import {toast} from "sonner";
+import axios from "axios";
+import {COMPANY_API_END_POINT} from "@/utils/constant";
+import {useDispatch} from "react-redux";
+import {setSingalCompany} from "@/redux/companySlice";
+import {Label} from "../ui/label";
 
 const CompanyCreate = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [companyName, setCompanyName] = useState();
+
+  console.log(companyName);
+
+  const registerCompany = async () => {
+    try {
+      const res = await axios.post(
+        `${COMPANY_API_END_POINT}/register`,
+        {companyName},
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+
+      if (res?.data?.success) {
+        dispatch(setSingalCompany(res.data.company));
+        toast.success(res.data.message);
+        const companyId = res?.data?.company?._id;
+        navigate(`/recruiter/company/${companyId}`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
-      <div className="max-w-3xl m-auto my-10 border rounded-2xl gap-5 px-5 flex flex-col  py-5">
-        <h2 className="text-lg font-mono">
-          {" "}
-          Enter Company Name for Registration{" "}
-        </h2>
+      <div className="max-w-3xl m-auto my-10 border rounded-2xl gap-2 px-5 flex flex-col  py-5">
+        <Label className="pb-2"> Enter Company Your Name </Label>
         <Input
           type="text"
+          name="companyName"
           className="border"
-          placeholder="Enter Your Company Name"
+          placeholder="Company Name..."
+          onChange={(e) => setCompanyName(e.target.value)}
         />
-        <div className="flex gap-5">
+        <div className="flex gap-5 mt-2">
           <Button
-            onClick={() => navigate("/admin/companies")}
+            onClick={() => navigate("/recruiter/dashboard")}
             className="bg-red-600 hover:bg-red-700"
           >
-            Cancel
+            Back
           </Button>
-          <Button className="bg-red-600 hover:bg-red-700">Continue</Button>
+          <Button
+            onClick={registerCompany}
+            className="bg-red-600 hover:bg-red-700"
+          >
+            Continue
+          </Button>
         </div>
       </div>
     </>

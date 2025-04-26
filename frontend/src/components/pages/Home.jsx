@@ -2,7 +2,6 @@ import useGetAllJobs from "@/hooks/useGetAllJobs";
 import HeroSection from "../HeroSection";
 import LatestJobes from "../LatestJobes";
 import {useSelector} from "react-redux";
-import Companies from "./Companies";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 
@@ -13,7 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     if (user?.role === "recruiter") {
-      navigate("/admin/companies");
+      navigate("/recruiter/dashboard");
     }
   });
 

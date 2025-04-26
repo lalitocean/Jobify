@@ -6,16 +6,14 @@ import {toast} from "sonner";
 import axios from "axios";
 import {COMPANY_API_END_POINT} from "@/utils/constant";
 import {useDispatch} from "react-redux";
-import {setSingalCompany} from "@/redux/companySlice";
 import {Label} from "../ui/label";
+import {setSingalCompany} from "@/redux/companySlice";
 
 const CompanyCreate = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [companyName, setCompanyName] = useState();
-
-  console.log(companyName);
 
   const registerCompany = async () => {
     try {

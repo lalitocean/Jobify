@@ -9,8 +9,9 @@ import Register from "./components/auth/Register";
 import Home from "./components/pages/Home";
 import JobDeatils from "./components/JobDeatils";
 import Profile from "./components/pages/Profile";
-import Companies from "./components/pages/Companies";
 import CompanyCreate from "./components/pages/CompanyCreate";
+import Dashboard from "./components/pages/Dashboard";
+import CompanySetup from "./components/pages/CompanySetup";
 
 const router = createBrowserRouter([
   {
@@ -51,12 +52,16 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/admin/companies",
-        element: <Companies />,
+        path: "/recruiter/dashboard",
+        element: <Dashboard />,
       },
       {
-        path: "/admin/company/create",
+        path: "/recruiter/company/create",
         element: <CompanyCreate />,
+      },
+      {
+        path: "/recruiter/company/:id",
+        element: <CompanySetup />,
       },
     ],
   },

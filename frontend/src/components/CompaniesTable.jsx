@@ -11,16 +11,32 @@ import {Avatar, AvatarImage} from "./ui/avatar";
 import {Popover, PopoverContent, PopoverTrigger} from "./ui/popover";
 import {MoreHorizontal} from "lucide-react";
 import {useSelector} from "react-redux";
+import {useEffect, useState} from "react";
 
 const CompaniesTable = () => {
-  const {companies} = useSelector((store) => store.company);
+  const {companies, searchCompany} = useSelector((store) => store.company);
+  const [filterCompanies, setFilterCompanies] = useState(companies);
+
+  useEffect(() => {
+    const filterdCompany =
+      companies.length >= 0 &&
+      companies.filter((company) => {
+        if (!searchCompany) {
+          return true;
+        }
+        return company?.name
+          ?.toLowerCase()
+          .includes(searchCompany.toLowerCase());
+      });
+    setFilterCompanies(filterdCompany);
+  }, [searchCompany, filterCompanies]);
 
   return (
     <>
-      <div className="py-5">
+      <div className="py-5 ">
         <Label className="text-2xl font-bold">Registered Companies </Label>
       </div>
-      <div className="border rounded-2xl overflow-hidden p-1">
+      <div className="border rounded-2xl overflow-hidden p-1 bg-gray-50">
         <Table>
           <TableHeader>
             <TableRow>
@@ -31,7 +47,7 @@ const CompaniesTable = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {companies?.map((company) => (
+            {filterCompanies?.map((company) => (
               <tr key={company._id}>
                 <TableCell>
                   <Avatar>

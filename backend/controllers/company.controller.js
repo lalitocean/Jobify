@@ -76,7 +76,6 @@ export const getCompanyById = async (req, res) => {
       success: true,
     });
   } catch (error) {
-    nbv;
     console.log(error.message);
   }
 };
@@ -112,6 +111,7 @@ export const updateCompany = async (req, res) => {
 
     return res.status(200).json({
       message: "Company info updated...",
+
       success: true,
     });
   } catch (error) {

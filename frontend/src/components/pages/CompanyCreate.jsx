@@ -52,7 +52,7 @@ const CompanyCreate = () => {
         />
         <div className="flex gap-5 mt-2">
           <Button
-            onClick={() => navigate("/recruiter/dashboard")}
+            onClick={() => navigate("/recruiter/companies")}
             className="bg-red-600 hover:bg-red-700"
           >
             Back

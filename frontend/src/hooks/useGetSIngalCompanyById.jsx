@@ -4,7 +4,7 @@ import axios from "axios";
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 
-const useGetSIngalCompanyById = (companyId) => {
+const useGetSingalCompanyById = (companyId) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,4 +27,4 @@ const useGetSIngalCompanyById = (companyId) => {
   }, [companyId, dispatch]);
 };
 
-export default useGetSIngalCompanyById;
+export default useGetSingalCompanyById;

@@ -8,10 +8,13 @@ import axios from "axios";
 import {COMPANY_API_END_POINT} from "@/utils/constant";
 import {toast} from "sonner";
 import {useSelector} from "react-redux";
+import useGetSingalCompanyById from "@/hooks/useGetSingalCompanyById";
 
 const CompanySetup = () => {
-  const navigate = useNavigate();
   const params = useParams();
+  useGetSingalCompanyById(params.id);
+
+  const navigate = useNavigate();
 
   const [input, setInput] = useState({
     companyName: "",
@@ -64,7 +67,6 @@ const CompanySetup = () => {
       toast.error(error.response.data.message);
     }
   };
-
   useEffect(() => {
     setInput({
       companyName: singalCompany?.name || "",
@@ -87,12 +89,7 @@ const CompanySetup = () => {
             <ArrowLeft /> Back
           </Button>
         </div>
-        <div className="border rounded-2xl">
-          <div className="mt-5">
-            <h2 className="text-lg text-center font-mono">
-              Enter you your Company info.
-            </h2>
-          </div>
+        <div className="border rounded-2xl pt-5">
           <form action="" className=" px-5" onSubmit={formHandler}>
             <div className="mb-5 flex flex-col gap-4">
               <div className="w-full">
@@ -139,7 +136,7 @@ const CompanySetup = () => {
                 />
               </div>
             </div>
-            <div className=" mt-5">
+            <div className="mt-5">
               <Input
                 type="file"
                 accept="image/*"

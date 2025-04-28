@@ -8,7 +8,7 @@ import useGetAllCompanies from "@/hooks/useGetAllCompanies";
 import {useDispatch} from "react-redux";
 import {setsearchCompany} from "@/redux/companySlice";
 
-const Dashboard = () => {
+const Companies = () => {
   const [input, setInput] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const Dashboard = () => {
     <>
       {/* Register copanies */}
 
-      <div className="max-w-5xl m-auto my-5 border rounded-2xl gap-5 px-5 flex flex-col  py-5">
+      <div className="max-w-5xl m-auto my-22 border rounded-2xl gap-5 px-5 flex flex-col py-5">
         <div className="flex justify-between gap-5">
           <Input
             onChange={(e) => setInput(e.target.value)}
@@ -47,4 +47,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Companies;

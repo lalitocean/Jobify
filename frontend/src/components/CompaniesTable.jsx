@@ -12,10 +12,13 @@ import {Popover, PopoverContent, PopoverTrigger} from "./ui/popover";
 import {MoreHorizontal} from "lucide-react";
 import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 const CompaniesTable = () => {
   const {companies, searchCompany} = useSelector((store) => store.company);
   const [filterCompanies, setFilterCompanies] = useState(companies);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const filterdCompany =
@@ -29,7 +32,7 @@ const CompaniesTable = () => {
           .includes(searchCompany.toLowerCase());
       });
     setFilterCompanies(filterdCompany);
-  }, [searchCompany, filterCompanies]);
+  }, [searchCompany]);
 
   return (
     <>
@@ -61,9 +64,15 @@ const CompaniesTable = () => {
                     <PopoverTrigger>
                       <MoreHorizontal />
                     </PopoverTrigger>
-                    <PopoverContent>
-                      <div>
-                        <button>Edit</button>
+                    <PopoverContent className="w-32">
+                      <div className="flex justify-center">
+                        <button
+                          onClick={() =>
+                            navigate(`/recruiter/company/${company._id}`)
+                          }
+                        >
+                          Edit
+                        </button>
                       </div>
                     </PopoverContent>
                   </Popover>

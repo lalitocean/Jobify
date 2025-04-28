@@ -18,7 +18,10 @@ const Header = () => {
     {name: "Contact", path: "/contact"},
   ];
 
-  const adminNavLinks = [{name: "Dashboard", path: "/recruiter/dashboard"}];
+  const adminNavLinks = [
+    {name: "Companies", path: "/recruiter/companies"},
+    {name: "Jobs", path: "/recruiter/jobs"},
+  ];
 
   const [open, setOpen] = useState(false);
 

@@ -21,7 +21,7 @@ const CompaniesTable = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const filterdCompany =
+    const filteredCompany =
       companies.length >= 0 &&
       companies.filter((company) => {
         if (!searchCompany) {
@@ -31,7 +31,7 @@ const CompaniesTable = () => {
           ?.toLowerCase()
           .includes(searchCompany.toLowerCase());
       });
-    setFilterCompanies(filterdCompany);
+    setFilterCompanies(filteredCompany);
   }, [searchCompany]);
 
   return (

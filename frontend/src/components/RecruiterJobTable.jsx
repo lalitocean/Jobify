@@ -7,46 +7,65 @@ import {
   TableCell,
 } from "./ui/table";
 import {Label} from "./ui/label";
-import {Avatar, AvatarImage} from "./ui/avatar";
 import {Popover, PopoverContent, PopoverTrigger} from "./ui/popover";
 import {MoreHorizontal} from "lucide-react";
+import {useSelector} from "react-redux";
+import {useEffect, useState} from "react";
 
 const RecruiterJobTable = () => {
+  const {adminAllJobs, jobSearchInput} = useSelector((store) => store.jobs);
+
+  const [filterJob, setFilterJobs] = useState(adminAllJobs || []);
+
+  useEffect(() => {
+    const filteredJobs =
+      adminAllJobs.length >= 0 &&
+      adminAllJobs.filter((job) => {
+        if (!jobSearchInput) {
+          return true;
+        }
+        return adminAllJobs?.name
+          ?.toLowerCase()
+          .includes(jobSearchInput.toLowerCase());
+      });
+    setFilterJobs(filteredJobs);
+  }, [jobSearchInput]);
+
   return (
     <>
       <div className="py-5 ">
-        <Label className="text-2xl font-bold">Created Jobs </Label>
+        <Label className="text-2xl font-bold">Registered Companies </Label>
       </div>
       <div className="border rounded-2xl overflow-hidden p-1 bg-gray-50">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Logo</TableHead>
-              <TableHead>Name</TableHead>
+              <TableHead>Company Name</TableHead>
+              <TableHead>Role</TableHead>
               <TableHead>Date</TableHead>
               <TableHead>Action</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableCell>
-              <Avatar>
-                <AvatarImage>Logo</AvatarImage>
-              </Avatar>
-            </TableCell>
-            <TableCell> Name</TableCell>
-            <TableCell>Date</TableCell>
-            <TableCell className="cursor-pointer">
-              <Popover>
-                <PopoverTrigger>
-                  <MoreHorizontal />
-                </PopoverTrigger>
-                <PopoverContent className="w-32">
-                  <div className="flex justify-center">
-                    <button>Edit</button>
-                  </div>
-                </PopoverContent>
-              </Popover>
-            </TableCell>
+            {filterJob?.map((job) => (
+              <tr key={job._id}>
+                <TableCell>{job?.company?.name}</TableCell>
+                <TableCell> {job?.title}</TableCell>
+                <TableCell>{job?.createdAt.split("T")[0]}</TableCell>
+                <TableCell className="cursor-pointer">
+                  <Popover>
+                    <PopoverTrigger>
+                      <MoreHorizontal />
+                    </PopoverTrigger>
+                    <PopoverContent className="w-32">
+                      <div className="flex justify-center">
+                        <button>Edit</button>
+                      </div>
+                    </PopoverContent>
+                  </Popover>
+                </TableCell>
+              </tr>
+            ))}
           </TableBody>
         </Table>
       </div>

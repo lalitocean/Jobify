@@ -12,7 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     if (user?.role === "recruiter") {
-      navigate("/recruiter/dashboard");
+      navigate("/recruiter/companies");
     }
   });
 

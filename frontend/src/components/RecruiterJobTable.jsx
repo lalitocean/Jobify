@@ -24,7 +24,7 @@ const RecruiterJobTable = () => {
         if (!jobSearchInput) {
           return true;
         }
-        return job?.name?.toLowerCase().includes(jobSearchInput.toLowerCase());
+        return job?.title?.toLowerCase().includes(jobSearchInput.toLowerCase());
       });
     setFilterJobs(filteredJobs);
   }, [jobSearchInput]);

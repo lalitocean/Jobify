@@ -8,11 +8,10 @@ import {setJobSearchInput} from "@/redux/jobSlice";
 import {useNavigate} from "react-router-dom";
 
 const RecruiterJobs = () => {
-  useGetAllAdminJob();
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  useGetAllAdminJob();
   useEffect(() => {
     dispatch(setJobSearchInput(input));
   }, [input]);
@@ -33,7 +32,7 @@ const RecruiterJobs = () => {
             onClick={() => navigate("/recruiter/jobs/create")}
             className="bg-red-600 hover:bg-red-700"
           >
-            Add Job
+            Create Job
           </Button>
         </div>
 

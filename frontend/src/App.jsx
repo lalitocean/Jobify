@@ -14,6 +14,7 @@ import CompanySetup from "./components/pages/CompanySetup";
 import Companies from "./components/pages/Companies";
 import RecruiterJobs from "./components/pages/RecruiterJobs";
 import JobPost from "./components/pages/JobPost";
+import Applicants from "./components/pages/Applicants";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
       {
         path: "/recruiter/jobs",
         element: <RecruiterJobs />,
+      },
+      {
+        path: "/recruiter/jobs/:id/applicants",
+        element: <Applicants />,
       },
     ],
   },

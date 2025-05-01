@@ -11,8 +11,10 @@ import {Popover, PopoverContent, PopoverTrigger} from "./ui/popover";
 import {MoreHorizontal} from "lucide-react";
 import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 const RecruiterJobTable = () => {
+  const navigate = useNavigate();
   const {adminAllJobs, jobSearchInput} = useSelector((store) => store.jobs);
 
   const [filterJob, setFilterJobs] = useState(adminAllJobs);
@@ -56,8 +58,20 @@ const RecruiterJobTable = () => {
                       <MoreHorizontal />
                     </PopoverTrigger>
                     <PopoverContent className="w-32">
-                      <div className="flex justify-center">
-                        <button>Edit</button>
+                      <div className="flex flex-col gap-2">
+                        <button>
+                          <span
+                            className="hover:underline"
+                            onClick={() =>
+                              navigate(`/recruiter/jobs/${job?._id}/applicants`)
+                            }
+                          >
+                            Applicants
+                          </span>
+                        </button>
+                        <button>
+                          <span className="hover:underline">Edit</span>
+                        </button>
                       </div>
                     </PopoverContent>
                   </Popover>

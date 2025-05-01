@@ -26,7 +26,7 @@ const RecruiterJobs = () => {
             onChange={(e) => setInput(e.target.value)}
             type="text"
             className="border w-52"
-            placeholder="Search..."
+            placeholder="Search, filter by title"
           />
           <Button
             onClick={() => navigate("/recruiter/jobs/create")}

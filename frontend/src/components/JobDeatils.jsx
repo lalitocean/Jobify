@@ -41,20 +41,20 @@ const JobDeatils = () => {
   }, [jobId, dispatch, user?._id]);
 
   // this wroks when user click
-  const JObApplyHandler = async () => {
+  const jObApplyHandler = async () => {
     try {
       const res = await axios.get(`${APPLY_JOB_API_END_POINT}apply/${jobId}`, {
         withCredentials: true,
       });
 
       if (res.data.success) {
+        toast.success(res.data.message);
         setIsApplied(true);
         const updatedSingalJob = {
           ...singalJob,
           applications: [...singalJob.applications, {applicant: user?._id}],
         };
         dispatch(setSingalJob(updatedSingalJob));
-        toast(res.data.message);
       }
     } catch (error) {
       console.log(error);
@@ -121,7 +121,7 @@ const JobDeatils = () => {
           </div>
 
           <Button
-            onClick={isApplied ? null : JObApplyHandler}
+            onClick={isApplied ? null : jObApplyHandler}
             // disabled={false}
             className={`${
               isApplied ? "bg-red-400 cursor-not-allowed" : "bg-red-700"

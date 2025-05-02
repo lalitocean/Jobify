@@ -10,9 +10,27 @@ import {
 import {Popover, PopoverContent, PopoverTrigger} from "./ui/popover";
 import {MoreHorizontal} from "lucide-react";
 import {useSelector} from "react-redux";
+import {toast} from "sonner";
+import axios from "axios";
+import {APPLY_JOB_API_END_POINT} from "@/utils/constant";
 
 const ApplicantsTable = () => {
-  const status = ["accpted", "Rejected"];
+  const statusArr = ["accepted", "rejected"];
+
+  const statusHandler = async (status, id) => {
+    try {
+      axios.defaults.withCredentials = true;
+      const res = await axios.post(
+        `${APPLY_JOB_API_END_POINT}/status/${id}/update`,
+        {status}
+      );
+      if (res.data.success) {
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
 
   const {applications} = useSelector((store) => store.applications);
   return (
@@ -38,7 +56,16 @@ const ApplicantsTable = () => {
                     <TableCell>{application?.applicant?.email}</TableCell>
                     <TableCell>{application?.applicant?.phoneNumber}</TableCell>
                     <TableCell>
-                      {application?.applicant?.profile?.resumeOriginalName}
+                      {application?.applicant?.profile?.resume ? (
+                        <a
+                          href={application?.applicant?.profile?.resume}
+                          target="_blank"
+                        >
+                          {application?.applicant?.profile?.resumeOriginalName}
+                        </a>
+                      ) : (
+                        <span>NA</span>
+                      )}
                     </TableCell>
                     <TableCell>
                       {application?.applicant?.createdAt.split("T")[0]}
@@ -50,10 +77,17 @@ const ApplicantsTable = () => {
                         </PopoverTrigger>
                         <PopoverContent className="w-32">
                           <div className="flex flex-col gap-2">
-                            {status.map((status, i) => {
+                            {statusArr.map((status, i) => {
                               return (
-                                <div key={i}>
-                                  <button>{status}</button>
+                                <div
+                                  key={i}
+                                  onClick={() =>
+                                    statusHandler(status, application?._id)
+                                  }
+                                >
+                                  <button className="underline">
+                                    {status}
+                                  </button>
                                 </div>
                               );
                             })}

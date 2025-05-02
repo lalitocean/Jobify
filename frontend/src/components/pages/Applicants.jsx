@@ -33,7 +33,7 @@ const Applicants = () => {
     <>
       <div className="max-w-7xl m-auto my-22 border rounded-2xl gap-5 px-5 flex flex-col py-5">
         <h1 className="text-lg font-semibold">
-          Applied User {applications.applications.length}
+          Applied User {applications?.applications?.length}
         </h1>
         <ApplicantsTable />
       </div>

@@ -43,15 +43,15 @@ const JobCard = ({job}) => {
           <h1 className="text-lg font-bold">{job?.title}</h1>
           <p className="text-sm">{job?.description}</p>
         </div>
-        <div className="my-1 flex gap-3 text-red-700">
+        <div className="my-2 mt-2 flex gap-3 text-red-700">
           <Badge variant="ghost">{job?.jobType}</Badge>
           <Badge variant="ghost">{job?.salary}</Badge>
           <Badge variant="ghost">{job?.position}</Badge>
         </div>
-        <div className="flex  gap-5 itmes-center mt-3">
+        <div className="w-full my-2 pt-2">
           <Button
             onClick={() => navigate(`/deatils/${job?._id}`)}
-            className="shadow-2xs bg-red-600 hover:bg-red-700 font-semibold"
+            className=" w-full shadow-2xs bg-red-600 hover:bg-red-700 font-semibold"
           >
             View
           </Button>

@@ -1,3 +1,4 @@
+import {useSelector} from "react-redux";
 import {
   Table,
   TableBody,
@@ -6,8 +7,17 @@ import {
   TableRow,
   TableCell,
 } from "./ui/table";
+import {SpaceIcon} from "lucide-react";
 
 export const AppliedJobTable = () => {
+  const {appliedJobs} = useSelector((store) => store.jobs);
+  if (!appliedJobs || appliedJobs.length === 0) {
+    return (
+      <span className="text-lg flex justify-center">
+        You haven't applied to any jobs yet
+      </span>
+    );
+  }
   return (
     <Table>
       <TableHeader>
@@ -19,12 +29,12 @@ export const AppliedJobTable = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {[1, 2, 3, 4].map((item, i) => (
-          <TableRow key={i}>
-            <TableCell> Company Name</TableCell>
-            <TableCell> Role</TableCell>
-            <TableCell> Date</TableCell>
-            <TableCell> Status</TableCell>
+        {appliedJobs.map((application) => (
+          <TableRow key={application._id}>
+            <TableCell> {application?.job?.company?.name}</TableCell>
+            <TableCell> {application?.job?.title}</TableCell>
+            <TableCell>{application?.createdAt?.split("T")[0]}</TableCell>
+            <TableCell> {application?.status}</TableCell>
           </TableRow>
         ))}
       </TableBody>

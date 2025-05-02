@@ -12,7 +12,7 @@ import {MoreHorizontal} from "lucide-react";
 import {useSelector} from "react-redux";
 import {toast} from "sonner";
 import axios from "axios";
-import {APPLY_JOB_API_END_POINT} from "@/utils/constant";
+import {APPLICATION_API_END_POINT} from "@/utils/constant";
 
 const ApplicantsTable = () => {
   const statusArr = ["accepted", "rejected"];
@@ -21,7 +21,7 @@ const ApplicantsTable = () => {
     try {
       axios.defaults.withCredentials = true;
       const res = await axios.post(
-        `${APPLY_JOB_API_END_POINT}/status/${id}/update`,
+        `${APPLICATION_API_END_POINT}/status/${id}/update`,
         {status}
       );
       if (res.data.success) {

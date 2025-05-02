@@ -1,7 +1,7 @@
 import {useEffect} from "react";
 import ApplicantsTable from "../ApplicantsTable";
 import axios from "axios";
-import {APPLY_JOB_API_END_POINT} from "@/utils/constant";
+import {APPLICATION_API_END_POINT} from "@/utils/constant";
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {setApplications} from "@/redux/applicationSlice";
@@ -16,7 +16,7 @@ const Applicants = () => {
     const fetchedApplicants = async () => {
       try {
         const res = await axios.get(
-          `${APPLY_JOB_API_END_POINT}/${params.id}/applicants`,
+          `${APPLICATION_API_END_POINT}/${params.id}/applicants`,
           {withCredentials: true}
         );
 

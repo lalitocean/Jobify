@@ -17,10 +17,10 @@ const Home = () => {
   });
 
   return (
-    <>
+    <div className="h-fit">
       <HeroSection />
       <LatestJobes />
-    </>
+    </div>
   );
 };
 

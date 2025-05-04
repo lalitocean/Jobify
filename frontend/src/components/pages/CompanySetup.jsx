@@ -60,7 +60,7 @@ const CompanySetup = () => {
 
       if (res.data.success) {
         toast.success(res.data.message);
-        navigate("/recruiter/dashboard");
+        navigate("/recruiter/companies");
       }
     } catch (error) {
       console.log(error.message);
@@ -82,7 +82,7 @@ const CompanySetup = () => {
       <div className="max-w-3xl mx-auto my-10 px-5 ">
         <div>
           <Button
-            onClick={() => navigate("/recruiter/company/create")}
+            onClick={() => navigate("/recruiter/companies")}
             variant="outline"
             className="mb-5"
           >

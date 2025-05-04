@@ -14,9 +14,8 @@ const Header = () => {
   const UserNavLinks = [
     {name: "Home", path: "/"},
     {name: "Jobs", path: "/jobs"},
-    {name: "Browse", path: "/browse"},
-    {name: "Contact", path: "/contact"},
   ];
+  98;
 
   const adminNavLinks = [
     {name: "Companies", path: "/recruiter/companies"},
@@ -62,109 +61,10 @@ const Header = () => {
                 </a>{" "}
               </Link>
             </div>
-            <div className="hidden md:block">
-              <nav>
-                <ul className="flex items-center gap-6 text-md ">
-                  {user && user.role === "recruiter"
-                    ? adminNavLinks.map((link) => {
-                        return (
-                          <Link
-                            key={link.name}
-                            to={link.path}
-                            className="text-gray-600 hover:text-red-700 transition-colors font-medium"
-                          >
-                            {link.name}
-                          </Link>
-                        );
-                      })
-                    : UserNavLinks.map((link) => {
-                        return (
-                          <Link
-                            key={link.name}
-                            to={link.path}
-                            className="text-gray-600 hover:text-red-700 transition-colors font-medium"
-                          >
-                            {link.name}
-                          </Link>
-                        );
-                      })}
-                </ul>
-              </nav>
-            </div>
-            {/* Desktop Nav */}
-            <div className="flex items-center gap-4">
-              <div className="hidden sm:flex sm:gap-4">
-                {!user ? (
-                  <>
-                    <Link to="/register">
-                      <Button variant="outline">Register</Button>
-                    </Link>
-                    <Link to="/login">
-                      <Button
-                        className="bg-red-600 text-white
-                        hover:bg-red-700
-                        hover:text-white"
-                        variant="outline"
-                      >
-                        Login
-                      </Button>
-                    </Link>
-                  </>
-                ) : (
-                  <>
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <Avatar>
-                          <AvatarImage
-                            src={user?.profile?.profilePhoto}
-                            alt="profilePhoto"
-                          />
-                        </Avatar>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-50 mt-10 shadow-2xs bg-white text-black p-4 flex flex-col">
-                        <div className="flex gap-2 space-y-2 ">
-                          <Avatar>
-                            <AvatarImage
-                              src={user?.profile?.profilePhoto}
-                              alt="profilePhoto"
-                            />
-                          </Avatar>
-                          <h4 className=" font-sans text-foreground">
-                            Hi, {user?.fullName}
-                          </h4>
-                        </div>
-                        <div className="flex flex-col">
-                          <div className="flex space-x-2c w-fit items-center ">
-                            {user && user.role === "student" ? (
-                              <>
-                                <User />
-                                <Button className="border-none" variant="link">
-                                  <Link to="/profile">View Profile</Link>
-                                </Button>
-                              </>
-                            ) : null}
-                          </div>
-                          <div className="flex  space-x-2 w-fit items-center ">
-                            <LogOut />
-                            <Button onClick={logoutHandler} variant="link">
-                              logout
-                            </Button>
-                          </div>
-                        </div>
-                      </PopoverContent>
-                    </Popover>
-                  </>
-                )}
-              </div>
-              <div className="block md:hidden">
-                <button
-                  onClick={toggleNav}
-                  className="rounded-sm bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
-                >
-                  {open ? <X /> : <Menu />}
-                </button>
-                {open && (
-                  <div className="xl:hidden absolute bg-gray-100 w-[50vw] top-[65px] z-0 flex flex-col right-0 text-black text-center py-5 pb-5 gap-10 font-bold max-h-[90vh] ">
+            <div className="flex items-center justify-center gap-5">
+              <div className="hidden md:block">
+                <nav>
+                  <ul className="flex items-center gap-6 text-md ">
                     {user && user.role === "recruiter"
                       ? adminNavLinks.map((link) => {
                           return (
@@ -188,8 +88,114 @@ const Header = () => {
                             </Link>
                           );
                         })}
-                  </div>
-                )}
+                  </ul>
+                </nav>
+              </div>
+              {/* Desktop Nav */}
+              <div className="flex items-center gap-4">
+                <div className="sm:flex sm:gap-4">
+                  {!user ? (
+                    <>
+                      <Link to="/register">
+                        <Button className="hidden sm:flex" variant="outline">
+                          Register
+                        </Button>
+                      </Link>
+                      <Link to="/login">
+                        <Button
+                          className="bg-red-600 text-white
+                        hover:bg-red-700
+                        hover:text-white"
+                          variant="outline"
+                        >
+                          Login
+                        </Button>
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Popover className="">
+                        <PopoverTrigger asChild>
+                          <Avatar>
+                            <AvatarImage
+                              src={user?.profile?.profilePhoto}
+                              alt="profilePhoto"
+                            />
+                          </Avatar>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-50 mt-10 shadow-2xs bg-white text-black p-4 flex flex-col">
+                          <div className="flex gap-2 space-y-2 ">
+                            <Avatar>
+                              <AvatarImage
+                                src={user?.profile?.profilePhoto}
+                                alt="profilePhoto"
+                              />
+                            </Avatar>
+                            <h4 className=" font-sans text-foreground">
+                              Hi, {user?.fullName}
+                            </h4>
+                          </div>
+                          <div className="flex flex-col">
+                            <div className="flex space-x-2c w-fit items-center ">
+                              {user && user.role === "student" ? (
+                                <>
+                                  <User />
+                                  <Button
+                                    className="border-none"
+                                    variant="link"
+                                  >
+                                    <Link to="/profile">View Profile</Link>
+                                  </Button>
+                                </>
+                              ) : null}
+                            </div>
+                            <div className="flex  space-x-2 w-fit items-center ">
+                              <LogOut />
+                              <Button onClick={logoutHandler} variant="link">
+                                logout
+                              </Button>
+                            </div>
+                          </div>
+                        </PopoverContent>
+                      </Popover>
+                    </>
+                  )}
+                </div>
+                <div className="block md:hidden">
+                  <button
+                    onClick={toggleNav}
+                    className="rounded-sm bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
+                  >
+                    {open ? <X /> : <Menu />}
+                  </button>
+                  {open && (
+                    <div className="xl:hidden absolute bg-gray-100 w-[50vw] top-[65px] z-0 flex flex-col right-0 text-black text-center py-5 pb-5 gap-10 font-bold max-h-[90vh] ">
+                      {user && user.role === "recruiter"
+                        ? adminNavLinks.map((link) => {
+                            return (
+                              <Link
+                                key={link.name}
+                                to={link.path}
+                                className="text-gray-600 hover:text-red-700 transition-colors font-medium"
+                              >
+                                {link.name}
+                              </Link>
+                            );
+                          })
+                        : UserNavLinks.map((link) => {
+                            return (
+                              <Link
+                                key={link.name}
+                                to={link.path}
+                                className="text-gray-600 hover:text-red-700 transition-colors font-medium"
+                              >
+                                {link.name}
+                              </Link>
+                            );
+                          })}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>

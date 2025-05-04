@@ -7,7 +7,7 @@ const Jobs = () => {
 
   return (
     <>
-      <div className=" m-auto max-w-screen-xl my-5">
+      <div className="m-auto max-w-screen-xl my-5">
         <div className="flex justify-center gap-5 px-5">
           {/* Job fillter */}
           <div className="">
@@ -18,7 +18,7 @@ const Jobs = () => {
           <div className="w-fit">
             {allJobs.length <= 0 ? (
               <span className="flex justify-center items-center h-full">
-                <span className="text-2xl font-mono">Job Not Found:)</span>
+                <span className="text-2xl font-mono">Job Not Found!</span>
               </span>
             ) : (
               <ul className="grid grid-cols-3 gap-5 overflow-y-auto h-[90vh] ">

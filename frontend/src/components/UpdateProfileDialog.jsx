@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogClose,
@@ -6,18 +6,18 @@ import {
   DialogFooter,
   DialogHeader,
 } from "./ui/dialog";
-import {Label} from "./ui/label";
-import {Input} from "./ui/input";
-import {Button} from "./ui/button";
-import {useDispatch, useSelector} from "react-redux";
+import { Label } from "./ui/label";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import {USER_API_END_POINT} from "@/utils/constant";
-import {toast} from "sonner";
-import {setUser} from "@/redux/authSlice";
 
-const UpdateProfileDialog = ({open, setOpen}) => {
+import { toast } from "sonner";
+import { setUser } from "@/redux/authSlice";
+
+const UpdateProfileDialog = ({ open, setOpen }) => {
   // user form redux store
-  const {user} = useSelector((store) => store.auth);
+  const { user } = useSelector((store) => store.auth);
 
   const [input, setInput] = useState({
     fullName: user?.fullName,
@@ -29,12 +29,12 @@ const UpdateProfileDialog = ({open, setOpen}) => {
   });
 
   const changeEventHandler = (e) => {
-    setInput({...input, [e.target.name]: e.target.value});
+    setInput({ ...input, [e.target.name]: e.target.value });
   };
 
   const fileHandler = (e) => {
     const file = e.target.files?.[0];
-    setInput({...input, file});
+    setInput({ ...input, file });
   };
 
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ const UpdateProfileDialog = ({open, setOpen}) => {
 
     try {
       const res = await axios.post(
-        `${USER_API_END_POINT}/profile/update`,
+        `user/profile/update`,
         formData,
         {
           headers: {

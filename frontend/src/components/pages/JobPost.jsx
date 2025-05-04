@@ -1,8 +1,8 @@
-import {Label} from "@radix-ui/react-label";
-import React, {useState} from "react";
-import {Input} from "../ui/input";
-import {Button} from "../ui/button";
-import {useNavigate} from "react-router-dom";
+import { Label } from "@radix-ui/react-label";
+import React, { useState } from "react";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { useNavigate } from "react-router-dom";
 import {
   Select,
   SelectContent,
@@ -10,14 +10,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {useSelector} from "react-redux";
-import {SelectGroup} from "@radix-ui/react-select";
+import { useSelector } from "react-redux";
+import { SelectGroup } from "@radix-ui/react-select";
 import axios from "axios";
-import {JOB_API_END_POINT} from "@/utils/constant";
-import {toast} from "sonner";
+
+import { toast } from "sonner";
 
 const JobPost = () => {
-  const {companies} = useSelector((store) => store.company);
+  const { companies } = useSelector((store) => store.company);
 
   const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ const JobPost = () => {
   // input handler
 
   const eventChangeHandler = (e) => {
-    setInput({...input, [e.target.name]: e.target.value});
+    setInput({ ...input, [e.target.name]: e.target.value });
   };
 
   // selectChangeHandler
@@ -46,7 +46,7 @@ const JobPost = () => {
       (company) => company.name.toLowerCase() === value
     );
 
-    setInput({...input, companyId: selectedCompany._id});
+    setInput({ ...input, companyId: selectedCompany._id });
   };
 
   // form handler
@@ -54,7 +54,7 @@ const JobPost = () => {
   const submitFromHandler = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${JOB_API_END_POINT}/post`, input, {
+      const res = await axios.post(`job/post`, input, {
         headers: {
           "Content-Type": "application/json",
         },

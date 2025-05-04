@@ -1,23 +1,23 @@
-import {useEffect} from "react";
+import { useEffect } from "react";
 import ApplicantsTable from "../ApplicantsTable";
 import axios from "axios";
-import {APPLICATION_API_END_POINT} from "@/utils/constant";
-import {useParams} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {setApplications} from "@/redux/applicationSlice";
+
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setApplications } from "@/redux/applicationSlice";
 
 const Applicants = () => {
   const dispatch = useDispatch();
   const params = useParams();
 
-  const {applications} = useSelector((store) => store.applications);
+  const { applications } = useSelector((store) => store.applications);
 
   useEffect(() => {
     const fetchedApplicants = async () => {
       try {
         const res = await axios.get(
-          `${APPLICATION_API_END_POINT}/${params.id}/applicants`,
-          {withCredentials: true}
+          `application/${params.id}/applicants`,
+          { withCredentials: true }
         );
 
         if (res.data.success) {

@@ -7,12 +7,12 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import {Popover, PopoverContent, PopoverTrigger} from "./ui/popover";
-import {MoreHorizontal} from "lucide-react";
-import {useSelector} from "react-redux";
-import {toast} from "sonner";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { MoreHorizontal } from "lucide-react";
+import { useSelector } from "react-redux";
+import { toast } from "sonner";
 import axios from "axios";
-import {APPLICATION_API_END_POINT} from "@/utils/constant";
+
 
 const ApplicantsTable = () => {
   const statusArr = ["accepted", "rejected"];
@@ -21,8 +21,8 @@ const ApplicantsTable = () => {
     try {
       axios.defaults.withCredentials = true;
       const res = await axios.post(
-        `${APPLICATION_API_END_POINT}/status/${id}/update`,
-        {status}
+        `application/status/${id}/update`,
+        { status }
       );
       if (res.data.success) {
         toast.success(res.data.message);
@@ -32,7 +32,7 @@ const ApplicantsTable = () => {
     }
   };
 
-  const {applications} = useSelector((store) => store.applications);
+  const { applications } = useSelector((store) => store.applications);
   return (
     <>
       <div className="border rounded-2xl overflow-hidden p-1 bg-gray-50">

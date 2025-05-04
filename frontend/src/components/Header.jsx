@@ -1,25 +1,25 @@
-import {useState} from "react";
-import {LogOut, Menu, User, X} from "lucide-react";
-import {Link, useNavigate} from "react-router-dom";
-import {Popover, PopoverTrigger, PopoverContent} from "@radix-ui/react-popover";
-import {Avatar, AvatarImage} from "./ui/avatar";
-import {Button} from "./ui/button";
-import {useDispatch, useSelector} from "react-redux";
-import {toast} from "sonner";
+import { useState } from "react";
+import { LogOut, Menu, User, X } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Popover, PopoverTrigger, PopoverContent } from "@radix-ui/react-popover";
+import { Avatar, AvatarImage } from "./ui/avatar";
+import { Button } from "./ui/button";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "sonner";
 import axios from "axios";
-import {USER_API_END_POINT} from "@/utils/constant";
-import {setUser} from "@/redux/authSlice";
+
+import { setUser } from "@/redux/authSlice";
 
 const Header = () => {
   const UserNavLinks = [
-    {name: "Home", path: "/"},
-    {name: "Jobs", path: "/jobs"},
+    { name: "Home", path: "/" },
+    { name: "Jobs", path: "/jobs" },
   ];
   98;
 
   const adminNavLinks = [
-    {name: "Companies", path: "/recruiter/companies"},
-    {name: "Jobs", path: "/recruiter/jobs"},
+    { name: "Companies", path: "/recruiter/companies" },
+    { name: "Jobs", path: "/recruiter/jobs" },
   ];
 
   const [open, setOpen] = useState(false);
@@ -33,7 +33,7 @@ const Header = () => {
 
   const logoutHandler = async () => {
     try {
-      const res = await axios.get(`${USER_API_END_POINT}/logout`, {
+      const res = await axios.get(`user/logout`, {
         withCredentials: true,
       });
 
@@ -48,7 +48,7 @@ const Header = () => {
     }
   };
 
-  const {user} = useSelector((store) => store.auth);
+  const { user } = useSelector((store) => store.auth);
   return (
     <>
       <header className="bg-whiten border-t border-gray-200  border-b">
@@ -67,27 +67,27 @@ const Header = () => {
                   <ul className="flex items-center gap-6 text-md ">
                     {user && user.role === "recruiter"
                       ? adminNavLinks.map((link) => {
-                          return (
-                            <Link
-                              key={link.name}
-                              to={link.path}
-                              className="text-gray-600 hover:text-red-700 transition-colors font-medium"
-                            >
-                              {link.name}
-                            </Link>
-                          );
-                        })
+                        return (
+                          <Link
+                            key={link.name}
+                            to={link.path}
+                            className="text-gray-600 hover:text-red-700 transition-colors font-medium"
+                          >
+                            {link.name}
+                          </Link>
+                        );
+                      })
                       : UserNavLinks.map((link) => {
-                          return (
-                            <Link
-                              key={link.name}
-                              to={link.path}
-                              className="text-gray-600 hover:text-red-700 transition-colors font-medium"
-                            >
-                              {link.name}
-                            </Link>
-                          );
-                        })}
+                        return (
+                          <Link
+                            key={link.name}
+                            to={link.path}
+                            className="text-gray-600 hover:text-red-700 transition-colors font-medium"
+                          >
+                            {link.name}
+                          </Link>
+                        );
+                      })}
                   </ul>
                 </nav>
               </div>
@@ -172,27 +172,27 @@ const Header = () => {
                     <div className="xl:hidden absolute bg-gray-100 w-[50vw] top-[65px] z-0 flex flex-col right-0 text-black text-center py-5 pb-5 gap-10 font-bold max-h-[90vh] ">
                       {user && user.role === "recruiter"
                         ? adminNavLinks.map((link) => {
-                            return (
-                              <Link
-                                key={link.name}
-                                to={link.path}
-                                className="text-gray-600 hover:text-red-700 transition-colors font-medium"
-                              >
-                                {link.name}
-                              </Link>
-                            );
-                          })
+                          return (
+                            <Link
+                              key={link.name}
+                              to={link.path}
+                              className="text-gray-600 hover:text-red-700 transition-colors font-medium"
+                            >
+                              {link.name}
+                            </Link>
+                          );
+                        })
                         : UserNavLinks.map((link) => {
-                            return (
-                              <Link
-                                key={link.name}
-                                to={link.path}
-                                className="text-gray-600 hover:text-red-700 transition-colors font-medium"
-                              >
-                                {link.name}
-                              </Link>
-                            );
-                          })}
+                          return (
+                            <Link
+                              key={link.name}
+                              to={link.path}
+                              className="text-gray-600 hover:text-red-700 transition-colors font-medium"
+                            >
+                              {link.name}
+                            </Link>
+                          );
+                        })}
                     </div>
                   )}
                 </div>

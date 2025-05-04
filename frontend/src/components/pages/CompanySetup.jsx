@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from "react";
-import {Button} from "../ui/button";
-import {ArrowLeft} from "lucide-react";
-import {Label} from "../ui/label";
-import {Input} from "../ui/input";
-import {useNavigate, useParams} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Button } from "../ui/button";
+import { ArrowLeft } from "lucide-react";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import {COMPANY_API_END_POINT} from "@/utils/constant";
-import {toast} from "sonner";
-import {useSelector} from "react-redux";
+
+import { toast } from "sonner";
+import { useSelector } from "react-redux";
 import useGetSingalCompanyById from "@/hooks/useGetSIngalCompanyById";
 
 const CompanySetup = () => {
@@ -24,15 +24,15 @@ const CompanySetup = () => {
     file: null,
   });
 
-  const {singalCompany} = useSelector((store) => store.company);
+  const { singalCompany } = useSelector((store) => store.company);
 
   const changeEventHandler = (e) => {
-    setInput({...input, [e.target.name]: e.target.value});
+    setInput({ ...input, [e.target.name]: e.target.value });
   };
 
   const changeFileHandler = (e) => {
     const file = e.target.files?.[0];
-    setInput({...input, file});
+    setInput({ ...input, file });
   };
 
   const formHandler = async (e) => {
@@ -48,7 +48,7 @@ const CompanySetup = () => {
 
     try {
       const res = await axios.put(
-        `${COMPANY_API_END_POINT}/update/${params.id}`,
+        `company/update/${params.id}`,
         formData,
         {
           headers: {

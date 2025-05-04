@@ -1,14 +1,14 @@
-import {Input} from "../ui/input";
-import {RadioGroup} from "../ui/radio-group";
-import {Label} from "../ui/label";
-import {Link} from "react-router-dom";
-import {useState} from "react";
-import {USER_API_END_POINT} from "@/utils/constant";
+import { Input } from "../ui/input";
+import { RadioGroup } from "../ui/radio-group";
+import { Label } from "../ui/label";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+
 import axios from "axios";
-import {toast} from "sonner";
-import {useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {setUser} from "@/redux/authSlice";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/redux/authSlice";
 
 const Login = () => {
   // Initial state for input fields
@@ -23,13 +23,13 @@ const Login = () => {
 
   // Handle input change
   const handleChange = (e) => {
-    setInput({...input, [e.target.name]: e.target.value});
+    setInput({ ...input, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
+      const res = await axios.post(`user/login`, input, {
         headers: {
           "Content-Type": "application/json",
         },

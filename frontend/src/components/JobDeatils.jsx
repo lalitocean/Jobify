@@ -1,17 +1,16 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
-import {Button} from "./ui/button";
-import {useParams} from "react-router-dom";
+import { Button } from "./ui/button";
+import { useParams } from "react-router-dom";
 import axios from "axios";
-import {APPLICATION_API_END_POINT,
-   JOB_API_END_POINT} from "@/utils/constant";
-import {useDispatch, useSelector} from "react-redux";
-import {setSingalJob} from "@/redux/jobSlice";
-import {toast} from "sonner";
+
+import { useDispatch, useSelector } from "react-redux";
+import { setSingalJob } from "@/redux/jobSlice";
+import { toast } from "sonner";
 
 const JobDeatils = () => {
-  const {singalJob} = useSelector((store) => store.jobs);
-  const {user} = useSelector((store) => store.auth);
+  const { singalJob } = useSelector((store) => store.jobs);
+  const { user } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const isInitalApplied = singalJob?.applications?.some(
     (application) => application.applicant === user?._id || false
@@ -23,7 +22,7 @@ const JobDeatils = () => {
   useEffect(() => {
     const getSingalJob = async () => {
       try {
-        const res = await axios.get(`${JOB_API_END_POINT}/get/${jobId}`, {
+        const res = await axios.get(`job/get/${jobId}`, {
           withCredentials: true,
         });
         if (res.data.success) {
@@ -45,7 +44,7 @@ const JobDeatils = () => {
   const jObApplyHandler = async () => {
     try {
       const res = await axios.get(
-        `${APPLICATION_API_END_POINT}apply/${jobId}`,
+        `application/apply/${jobId}`,
         {
           withCredentials: true,
         }
@@ -56,7 +55,7 @@ const JobDeatils = () => {
         setIsApplied(true);
         const updatedSingalJob = {
           ...singalJob,
-          applications: [...singalJob.applications, {applicant: user?._id}],
+          applications: [...singalJob.applications, { applicant: user?._id }],
         };
         dispatch(setSingalJob(updatedSingalJob));
       }
@@ -127,9 +126,8 @@ const JobDeatils = () => {
           <Button
             onClick={isApplied ? null : jObApplyHandler}
             // disabled={false}
-            className={`${
-              isApplied ? "bg-red-400 cursor-not-allowed" : "bg-red-700"
-            }  hover:bg-red-800 hover:text-white`}
+            className={`${isApplied ? "bg-red-400 cursor-not-allowed" : "bg-red-700"
+              }  hover:bg-red-800 hover:text-white`}
           >
             {isApplied ? "Already Apply" : "Apply Now"}
           </Button>

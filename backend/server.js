@@ -6,11 +6,10 @@ import userRoute from "./routes/user.route.js";
 import companyRoute from "./routes/company.route.js";
 import jobRoute from "./routes/job.route.js";
 import applicationRoute from "./routes/application.route.js";
-
 import dotenv from "dotenv";
-// load-env.js
+
 const env = process.env.NODE_ENV || 'development';
-require('dotenv').config({ path: `.env.${env}` });
+dotenv.config({ path: `.env.${env}` });
 
 const app = express();
 // Middleware
@@ -18,19 +17,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-const allowedOrigins = [
-  "https://hi-jobify.vercel.app",
-  "http://localhost:5173", // Add your local development URL if needed
-];
+// CORS Configuration
+const allowedOrigin = process.env.CORS_ALLOWED_ORIGIN;
 
 const corsOptions = {
-  origin: (origin, callback) => {
-    if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
+  origin: allowedOrigin,
   credentials: true,
 };
 

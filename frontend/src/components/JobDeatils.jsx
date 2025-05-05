@@ -43,8 +43,7 @@ const JobDeatils = () => {
   // this wroks when user click
   const jObApplyHandler = async () => {
     try {
-      const res = await axios.get(
-        `application/apply/${jobId}`,
+      const res = await axios.get(`application/apply/${jobId}`,
         {
           withCredentials: true,
         }

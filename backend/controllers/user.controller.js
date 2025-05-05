@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import {User} from "../models/user.model.js";
+import { User } from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 import getDataUri from "../utils/dataUri.js";
 import cloudinary from "../utils/cloudinary.js";
@@ -11,7 +11,7 @@ import cloudinary from "../utils/cloudinary.js";
 
 export const register = async (req, res) => {
   try {
-    const {fullName, email, phoneNumber, password, role} = req.body;
+    const { fullName, email, phoneNumber, password, role } = req.body;
     //   input missing logic
     if (!fullName || !email || !phoneNumber || !password || !role) {
       return res.status(400).json({
@@ -25,7 +25,7 @@ export const register = async (req, res) => {
     const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
 
     // user alrady exist logic
-    const user = await User.findOne({email});
+    const user = await User.findOne({ email });
     if (user) {
       return res.status(400).json({
         message: "User alrady exist with this email!",
@@ -62,16 +62,16 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    const {email, password, role} = req.body;
+    const { email, password, role } = req.body;
     //   input missing logic
     if (!email || !password || !role) {
       return res
         .status(400)
-        .json({message: "somthing is missing", success: false});
+        .json({ message: "somthing is missing", success: false });
     }
 
     // User Dose not exist Logic
-    let user = await User.findOne({email});
+    let user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({
         message: "Incorrect email...",
@@ -119,14 +119,15 @@ export const login = async (req, res) => {
       role: user.role,
       profile: user.profile,
     };
+    res.cookie('token', token, {
+      maxAge: 1 * 24 * 60 * 60 * 1000,
+      httpOnly: true,
+      sameSite: "strict",
+      secure: process.env.NODE_ENV !== "development",
+    })
 
     return res
       .status(200)
-      .cookie("token", token, {
-        maxAge: 1 * 24 * 60 * 60 * 1000,
-        httpsOnly: true,
-        sameSite: "strict",
-      })
       .json({
         message: `welcome back ${user.fullName}`,
         user,
@@ -139,18 +140,18 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    return res.status(200).cookie("token", "", {maxAge: 0}).json({
+    return res.status(200).cookie("token", "", { maxAge: 0 }).json({
       message: "Logout successfully",
       success: true,
     });
-  } catch (error) {}
+  } catch (error) { }
 };
 
 // for Update profile
 
 export const profileUpdate = async (req, res) => {
   try {
-    const {fullName, email, phoneNumber, bio, skills} = req.body;
+    const { fullName, email, phoneNumber, bio, skills } = req.body;
 
     // cloudinary to upload file
     const file = req.file;

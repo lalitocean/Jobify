@@ -7,13 +7,14 @@ import {
   postJob,
 } from "../controllers/job.controller.js";
 
+
 const router = express.Router();
 
 // Create a new job post (admin/authenticated)
 router.post("/post", isAuthenticated, postJob);
 
 // Get all jobs  
-router.get("/get", isAuthenticated, getAllJob);
+router.get("/get", getAllJob);
 
 // Get all jobs created by admin user
 router.get("/adminjob", isAuthenticated, getAdminJobs);

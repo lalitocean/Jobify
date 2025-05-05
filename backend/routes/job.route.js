@@ -9,9 +9,16 @@ import {
 
 const router = express.Router();
 
-router.route("/post").post(isAuthenticated, postJob);
-router.route("/get").get(isAuthenticated, getAllJob);
-router.route("/adminjob").get(isAuthenticated, getAdminJobs);
-router.route("/get/:id").get(isAuthenticated, getJobById);
+// Create a new job post (admin/authenticated)
+router.post("/post", isAuthenticated, postJob);
+
+// Get all jobs  
+router.get("/get", isAuthenticated, getAllJob);
+
+// Get all jobs created by admin user
+router.get("/adminjob", isAuthenticated, getAdminJobs);
+
+// Get a specific job by ID
+router.get("/get/:id", isAuthenticated, getJobById);
 
 export default router;

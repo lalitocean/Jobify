@@ -1,6 +1,5 @@
 import express from "express";
-import {multerUpload} from "../middlewares/multer.js";
-
+import { multerUpload } from "../middlewares/multer.js";
 import {
   getCompany,
   getCompanyById,
@@ -11,9 +10,16 @@ import isAuthenticated from "../middlewares/isAuthenticated.js";
 
 const router = express.Router();
 
-router.route("/register").post(isAuthenticated, registerCompany);
-router.route("/get").get(isAuthenticated, getCompany);
-router.route("/get/:id").get(isAuthenticated, getCompanyById);
-router.route("/update/:id").put(isAuthenticated, multerUpload, updateCompany);
+// Register a new company
+router.post("/register", isAuthenticated, registerCompany);
+
+// Get all companies 
+router.get("/get", isAuthenticated, getCompany);
+
+// Get a company by ID
+router.get("/get/:id", isAuthenticated, getCompanyById);
+
+// Update company info  
+router.put("/update/:id", isAuthenticated, multerUpload, updateCompany);
 
 export default router;

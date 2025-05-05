@@ -12,9 +12,10 @@ import {
 } from "@/components/ui/select";
 import { useSelector } from "react-redux";
 import { SelectGroup } from "@radix-ui/react-select";
-import axios from "axios";
+
 
 import { toast } from "sonner";
+import { apiRequest } from "@/utils/axios";
 
 const JobPost = () => {
   const { companies } = useSelector((store) => store.company);
@@ -54,7 +55,7 @@ const JobPost = () => {
   const submitFromHandler = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`job/post`, input, {
+      const res = await apiRequest.post(`job/post`, input, {
         headers: {
           "Content-Type": "application/json",
         },

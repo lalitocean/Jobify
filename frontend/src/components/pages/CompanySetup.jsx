@@ -4,11 +4,11 @@ import { ArrowLeft } from "lucide-react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 
 import { toast } from "sonner";
 import { useSelector } from "react-redux";
 import useGetSingalCompanyById from "@/hooks/useGetSIngalCompanyById";
+import { apiRequest } from "@/utils/axios";
 
 const CompanySetup = () => {
   const params = useParams();
@@ -47,7 +47,7 @@ const CompanySetup = () => {
     }
 
     try {
-      const res = await axios.put(
+      const res = await apiRequest.put(
         `company/update/${params.id}`,
         formData,
         {

@@ -1,15 +1,16 @@
 
 import { useEffect } from "react";
-import axios from "axios";
+
 import { useDispatch } from "react-redux";
 import { setAdminAllJobs } from "@/redux/jobSlice";
+import { apiRequest } from "@/utils/axios";
 
 const useGetAllAdminJob = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchAdminJobs = async () => {
       try {
-        const res = await axios.get(`job/adminjob`, {
+        const res = await apiRequest.get(`job/adminjob`, {
           withCredentials: true,
         });
 

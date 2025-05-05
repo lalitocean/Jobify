@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import ApplicantsTable from "../ApplicantsTable";
-import axios from "axios";
+
 
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setApplications } from "@/redux/applicationSlice";
+import { apiRequest } from "@/utils/axios";
 
 const Applicants = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const Applicants = () => {
   useEffect(() => {
     const fetchedApplicants = async () => {
       try {
-        const res = await axios.get(
+        const res = await apiRequest.get(
           `application/${params.id}/applicants`,
           { withCredentials: true }
         );

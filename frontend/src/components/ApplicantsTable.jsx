@@ -11,7 +11,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { MoreHorizontal } from "lucide-react";
 import { useSelector } from "react-redux";
 import { toast } from "sonner";
-import axios from "axios";
+
 
 
 const ApplicantsTable = () => {
@@ -19,8 +19,8 @@ const ApplicantsTable = () => {
 
   const statusHandler = async (status, id) => {
     try {
-      axios.defaults.withCredentials = true;
-      const res = await axios.post(
+
+      const res = await apiRequest.post(
         `application/status/${id}/update`,
         { status }
       );

@@ -120,6 +120,7 @@ export const login = async (req, res) => {
       profile: user.profile,
     };
     res.cookie('token', token, {
+      withCredentials: true,
       maxAge: 1 * 24 * 60 * 60 * 1000,
       httpOnly: true,
       sameSite: "strict",

@@ -1,15 +1,16 @@
 
 import { useEffect } from "react";
-import axios from "axios";
+
 import { setCompanies } from "@/redux/companySlice";
 import { useDispatch } from "react-redux";
+import { apiRequest } from "@/utils/axios";
 
 const useGetAllCompanies = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
-        const res = await axios.get(`company/get`, {
+        const res = await apiRequest.get(`company/get`, {
           withCredentials: true,
         });
 

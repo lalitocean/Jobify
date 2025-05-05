@@ -6,7 +6,7 @@ import { Avatar, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
-import axios from "axios";
+
 
 import { setUser } from "@/redux/authSlice";
 
@@ -33,7 +33,7 @@ const Header = () => {
 
   const logoutHandler = async () => {
     try {
-      const res = await axios.get(`user/logout`, {
+      const res = await apiRequest.get(`user/logout`, {
         withCredentials: true,
       });
 

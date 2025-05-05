@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 
 import { Button } from "./ui/button";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setSingalJob } from "@/redux/jobSlice";
 import { toast } from "sonner";
+import { apiRequest } from "@/utils/axios";
 
 const JobDeatils = () => {
   const { singalJob } = useSelector((store) => store.jobs);
@@ -22,7 +22,7 @@ const JobDeatils = () => {
   useEffect(() => {
     const getSingalJob = async () => {
       try {
-        const res = await axios.get(`job/get/${jobId}`, {
+        const res = await apiRequest.get(`job/get/${jobId}`, {
           withCredentials: true,
         });
         if (res.data.success) {
@@ -43,7 +43,7 @@ const JobDeatils = () => {
   // this wroks when user click
   const jObApplyHandler = async () => {
     try {
-      const res = await axios.get(`application/apply/${jobId}`,
+      const res = await apiRequest.get(`application/apply/${jobId}`,
         {
           withCredentials: true,
         }

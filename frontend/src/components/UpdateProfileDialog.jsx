@@ -10,10 +10,10 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 
 import { toast } from "sonner";
 import { setUser } from "@/redux/authSlice";
+import { apiRequest } from "@/utils/axios";
 
 const UpdateProfileDialog = ({ open, setOpen }) => {
   // user form redux store
@@ -53,7 +53,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
     }
 
     try {
-      const res = await axios.post(
+      const res = await apiRequest.post(
         `user/profile/update`,
         formData,
         {

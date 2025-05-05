@@ -4,11 +4,12 @@ import { Label } from "../ui/label";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-import axios from "axios";
+
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/redux/authSlice";
+import { apiRequest } from "@/utils/axios";
 
 const Login = () => {
   // Initial state for input fields
@@ -29,7 +30,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`user/login`, input, {
+      const res = await apiRequest.post(`user/login`, input, {
         headers: {
           "Content-Type": "application/json",
         },

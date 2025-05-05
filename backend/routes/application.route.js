@@ -10,7 +10,7 @@ import {
 const router = express.Router();
 
 // Apply for a job  
-router.post("/apply/:id", isAuthenticated, applyJob);
+router.get("/apply/:id", isAuthenticated, applyJob);
 
 router.get("/applied", isAuthenticated, getAppliedJob);
 
@@ -18,7 +18,7 @@ router.get("/applied", isAuthenticated, getAppliedJob);
 router.get("/:id/applicants", isAuthenticated, getApplicants);
 
 // Update application status (e.g., approved/rejected)
-router.put("/status/:id", isAuthenticated, updateStatus);
+router.post("/status/:id", isAuthenticated, updateStatus);
 
 export default router;
 

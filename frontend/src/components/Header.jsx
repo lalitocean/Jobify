@@ -9,6 +9,7 @@ import { toast } from "sonner";
 
 
 import { setUser } from "@/redux/authSlice";
+import { apiRequest } from "@/utils/axios";
 
 const Header = () => {
   const UserNavLinks = [
